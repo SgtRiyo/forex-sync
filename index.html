@@ -834,7 +834,7 @@
       right: 0;
       background: var(--bg2);
       border-top: 1px solid var(--border);
-      padding: 6px 0;
+      padding: 4px 0 6px;
       z-index: 100;
     }
 
@@ -854,6 +854,7 @@
       font-size: 10px;
       border: none;
       background: none;
+      min-width: 52px;
     }
 
     .mob-btn.active {
@@ -861,12 +862,89 @@
     }
 
     .mob-btn .icon {
-      font-size: 18px;
+      font-size: 20px;
+    }
+
+    /* DRAWER */
+    .mob-drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .6);
+      z-index: 200;
+    }
+
+    .mob-drawer-overlay.open {
+      display: block;
+    }
+
+    .mob-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg2);
+      border-top: 1px solid var(--border2);
+      border-radius: 18px 18px 0 0;
+      padding: 12px 0 32px;
+      z-index: 201;
+      transform: translateY(100%);
+      transition: transform .25s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .mob-drawer.open {
+      transform: translateY(0);
+    }
+
+    .mob-drawer-handle {
+      width: 36px;
+      height: 4px;
+      background: var(--border2);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+
+    .mob-drawer-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text3);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 0 20px 10px;
+    }
+
+    .mob-drawer-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 20px;
+      cursor: pointer;
+      color: var(--text2);
+      font-size: 14px;
+      transition: background .1s;
+    }
+
+    .mob-drawer-item:hover {
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .mob-drawer-item.active {
+      color: var(--accent);
+    }
+
+    .mob-drawer-icon {
+      font-size: 20px;
+      width: 26px;
+      text-align: center;
     }
 
     @media(max-width:640px) {
       .mobile-nav {
         display: block;
+      }
+
+      .main {
+        padding-bottom: 72px;
       }
     }
   </style>
@@ -1538,12 +1616,30 @@
 
   <div class="mobile-nav">
     <div class="mobile-nav-inner">
-      <button class="mob-btn active" onclick="go('dashboard')"><span class="icon">📊</span>Home</button>
-      <button class="mob-btn" onclick="go('setup')"><span class="icon">📈</span>Chart</button>
-      <button class="mob-btn" onclick="go('risk')"><span class="icon">⚖️</span>Risk</button>
-      <button class="mob-btn" onclick="go('jurnal')"><span class="icon">📒</span>Jurnal</button>
-      <button class="mob-btn" onclick="go('historis')"><span class="icon">🗂️</span>Historis</button>
+      <button class="mob-btn active" id="mn-dashboard" onclick="go('dashboard')"><span
+          class="icon">📊</span>Home</button>
+      <button class="mob-btn" id="mn-setup" onclick="go('setup')"><span class="icon">📈</span>Chart</button>
+      <button class="mob-btn" id="mn-jurnal" onclick="go('jurnal')"><span class="icon">📒</span>Jurnal</button>
+      <button class="mob-btn" id="mn-historis" onclick="go('historis')"><span class="icon">🗂️</span>Historis</button>
+      <button class="mob-btn" id="mn-more" onclick="openDrawer()"><span class="icon">☰</span>Menu</button>
     </div>
+  </div>
+
+  <!-- DRAWER OVERLAY -->
+  <div class="mob-drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+  <!-- DRAWER -->
+  <div class="mob-drawer" id="mobDrawer">
+    <div class="mob-drawer-handle"></div>
+    <div class="mob-drawer-title">Semua Menu</div>
+    <div class="mob-drawer-item" id="md-sesi" onclick="goDrawer('sesi')"><span
+        class="mob-drawer-icon">🌍</span><span>Sesi Market</span></div>
+    <div class="mob-drawer-item" id="md-risk" onclick="goDrawer('risk')"><span
+        class="mob-drawer-icon">⚖️</span><span>Risk & Money</span></div>
+    <div class="mob-drawer-item" id="md-checklist" onclick="goDrawer('checklist')"><span
+        class="mob-drawer-icon">✅</span><span>Pre-Trade Checklist</span></div>
+    <div class="mob-drawer-item" id="md-rules" onclick="goDrawer('rules')"><span
+        class="mob-drawer-icon">📖</span><span>Golden Rules</span></div>
   </div>
 
   <script src="https://s3.tradingview.com/tv.js"></script>
@@ -1568,19 +1664,50 @@
 
     // ====== NAV ======
     const ALL_PANELS = ['dashboard', 'setup', 'sesi', 'risk', 'checklist', 'jurnal', 'historis', 'rules'];
+    // pages accessible directly from bottom nav
+    const MAIN_MOB = ['dashboard', 'setup', 'jurnal', 'historis'];
+    // pages inside drawer
+    const DRAWER_MOB = ['sesi', 'risk', 'checklist', 'rules'];
 
     function go(name) {
       ALL_PANELS.forEach(p => document.getElementById('panel-' + p).classList.toggle('active', p === name));
+      // sidebar
       const navItems = document.querySelectorAll('.nav-item');
       const order = ['dashboard', 'setup', 'sesi', 'risk', 'checklist', 'jurnal', 'historis', 'rules'];
       navItems.forEach((el, i) => el.classList.toggle('active', order[i] === name));
-      document.querySelectorAll('.mob-btn').forEach((b, i) => b.classList.toggle('active', ['dashboard', 'setup',
-        'risk', 'jurnal', 'historis'
-      ][i] === name));
+      // bottom nav buttons
+      MAIN_MOB.forEach(id => {
+        const el = document.getElementById('mn-' + id);
+        if (el) el.classList.toggle('active', id === name);
+      });
+      const moreBtn = document.getElementById('mn-more');
+      if (moreBtn) moreBtn.classList.toggle('active', DRAWER_MOB.includes(name));
+      // drawer items
+      DRAWER_MOB.forEach(id => {
+        const el = document.getElementById('md-' + id);
+        if (el) el.classList.toggle('active', id === name);
+      });
       if (name === 'dashboard') renderDashboard();
       if (name === 'sesi') renderSessions();
       if (name === 'setup') initTV();
       if (name === 'historis') renderHistoris();
+    }
+
+    function openDrawer() {
+      document.getElementById('mobDrawer').classList.add('open');
+      document.getElementById('drawerOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      document.getElementById('mobDrawer').classList.remove('open');
+      document.getElementById('drawerOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function goDrawer(name) {
+      closeDrawer();
+      go(name);
     }
 
     // ====== CLOCK ======
