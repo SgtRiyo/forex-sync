@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forex Scalping Pro — 30 Tahun Pengalaman</title>
+<style>
+  :root {
+    --bg:        #0f0f0f;
+    --bg2:       #161616;
+    --bg3:       #1e1e1e;
+    --bg4:       #252525;
+    --border:    rgba(255,255,255,0.07);
+    --border2:   rgba(255,255,255,0.13);
+    --text:      #e8e4d8;
+    --text2:     #9c9890;
+    --text3:     #5a5854;
+    --accent:    #d4a853;
+    --accent2:   #b88c3a;
+    --green:     #4caf76;
+    --red:       #e05252;
+    --blue:      #5b9bd6;
+    --orange:    #e07840;
+    --radius:    10px;
+    --radius-lg: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #0f0f0f;
+  }
+  .logo-text { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .logo-sub  { font-size: 11px; color: var(--text3); margin-left: 2px; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .live-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .live-label { font-size: 12px; color: var(--text2); }
+  #top-clock { font-size: 15px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--accent); }
+
+  /* LAYOUT */
+  .layout { display: flex; height: calc(100vh - 56px); overflow: hidden; }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 200px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 16px 0;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+  .nav-section { font-size: 10px; color: var(--text3); letter-spacing: .08em; padding: 12px 18px 6px; text-transform: uppercase; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 18px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    color: var(--text2);
+    font-size: 13px;
+    transition: all .15s;
+  }
+  .nav-item:hover { color: var(--text); background: rgba(255,255,255,.03); }
+  .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(212,168,83,.06); }
+  .nav-icon { font-size: 16px; width: 18px; text-align: center; }
+
+  /* MAIN */
+  .main { flex: 1; overflow-y: auto; padding: 24px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* PAGE HEADER */
+  .page-header { margin-bottom: 20px; }
+  .page-title { font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: -.02em; }
+  .page-sub { font-size: 13px; color: var(--text2); margin-top: 3px; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+  }
+  .card-sm { padding: 12px 14px; }
+  .card-title { font-size: 10px; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+  .card-val { font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -.02em; }
+  .card-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+
+  /* BADGES */
+  .badge { display: inline-flex; align-items: center; font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 500; }
+  .badge-gold   { background: rgba(212,168,83,.15); color: var(--accent); }
+  .badge-green  { background: rgba(76,175,118,.15); color: var(--green); }
+  .badge-red    { background: rgba(224,82,82,.15);  color: var(--red); }
+  .badge-blue   { background: rgba(91,155,214,.15); color: var(--blue); }
+  .badge-orange { background: rgba(224,120,64,.15); color: var(--orange); }
+
+  /* SECTION LABEL */
+  .sec-label { font-size: 11px; font-weight: 600; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin: 18px 0 10px; }
+
+  /* SETUP CARDS */
+  .setup-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .setup-card:hover { border-color: var(--border2); background: var(--bg4); }
+  .setup-card.active { border-color: var(--accent); background: rgba(212,168,83,.05); }
+  .setup-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .setup-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .rule { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--text2); padding: 3px 0; line-height: 1.5; }
+  .rule-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text3); flex-shrink: 0; margin-top: 7px; }
+
+  /* TF PILLS */
+  .tf-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .tf-pill {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text2);
+    transition: all .15s;
+  }
+  .tf-pill:hover { border-color: var(--border2); color: var(--text); }
+  .tf-pill.active { background: var(--accent); border-color: var(--accent); color: #0f0f0f; font-weight: 600; }
+
+  /* CHART */
+  .chart-wrap {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .chart-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .chart-pair { font-size: 13px; font-weight: 600; color: var(--text); }
+  .chart-tf   { font-size: 11px; color: var(--text3); }
+  canvas { display: block; width: 100%; }
+
+  /* SESSION */
+  .sess-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .sess-name { font-size: 13px; font-weight: 500; min-width: 68px; }
+  .sess-bar-wrap { flex: 1; height: 6px; background: var(--bg4); border-radius: 3px; overflow: hidden; }
+  .sess-bar-fill { height: 100%; border-radius: 3px; transition: width .3s; }
+  .sess-time { font-size: 11px; color: var(--text3); min-width: 100px; text-align: right; }
+
+  /* FORM */
+  .form-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+  .form-label { font-size: 12px; color: var(--text2); min-width: 100px; }
+  input[type=number], input[type=text], select {
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    padding: 7px 10px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  input[type=number]:focus, input[type=text]:focus, select:focus { border-color: var(--accent); }
+  input[type=range] {
+    -webkit-appearance: none;
+    flex: 1;
+    height: 4px;
+    background: var(--bg4);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  /* RESULT BOX */
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-top: 14px; }
+  .result-cell { background: var(--bg3); padding: 12px 16px; }
+  .result-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
+  .result-val { font-size: 18px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+
+  /* CHECKLIST */
+  .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 5px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .check-box.on { background: var(--accent); border-color: var(--accent); }
+  .check-box.on::after { content: '✓'; font-size: 11px; font-weight: 700; color: #0f0f0f; }
+  .check-text { font-size: 13px; color: var(--text); }
+  .check-text.done { text-decoration: line-through; color: var(--text3); }
+
+  /* PROGRESS */
+  .prog-wrap { background: var(--bg4); border-radius: 3px; height: 4px; margin: 10px 0; }
+  .prog-fill { height: 100%; border-radius: 3px; background: var(--accent); transition: width .3s; }
+
+  /* JOURNAL TABLE */
+  table { width: 100%; border-collapse: collapse; }
+  thead th { text-align: left; font-size: 11px; color: var(--text3); font-weight: 500; padding: 6px 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: .04em; }
+  tbody td { padding: 9px 10px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,.02); }
+
+  /* BUTTON */
+  .btn {
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .btn:hover { background: var(--bg4); }
+  .btn-accent { background: var(--accent); border-color: var(--accent); color: #0f0f0f; font-weight: 600; }
+  .btn-accent:hover { background: var(--accent2); border-color: var(--accent2); }
+  .btn-danger { border-color: rgba(224,82,82,.3); color: var(--red); }
+  .btn-danger:hover { background: rgba(224,82,82,.1); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+  /* STAT HIGHLIGHT */
+  .stat-highlight { border-left: 2px solid var(--accent); padding-left: 12px; margin-bottom: 10px; }
+  .stat-hl-label { font-size: 11px; color: var(--text3); }
+  .stat-hl-val { font-size: 16px; font-weight: 600; color: var(--text); }
+
+  /* TIPS BOX */
+  .tip-box { background: rgba(212,168,83,.07); border: 1px solid rgba(212,168,83,.2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px; }
+  .tip-box p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .tip-box strong { color: var(--accent); font-weight: 600; }
+
+  /* INDICATOR PILL */
+  .ind-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .ind-pill { padding: 5px 12px; background: var(--bg4); border: 1px solid var(--border); border-radius: 99px; font-size: 12px; color: var(--text2); }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .sidebar { display: none; }
+    .grid3, .grid4 { grid-template-columns: 1fr 1fr; }
+    .result-grid { grid-template-columns: 1fr 1fr; }
+    .main { padding: 16px; }
+    .topbar { padding: 0 16px; }
+    .logo-sub { display: none; }
+  }
+  @media (max-width: 400px) {
+    .grid3, .grid4 { grid-template-columns: 1fr; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  /* MOBILE NAV BOTTOM */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 8px 0;
+    z-index: 100;
+  }
+  .mobile-nav-inner { display: flex; justify-content: space-around; }
+  .mob-nav-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; cursor: pointer; color: var(--text3); font-size: 10px; border: none; background: none; }
+  .mob-nav-btn.active { color: var(--accent); }
+  .mob-nav-btn .icon { font-size: 20px; }
+  @media (max-width: 640px) {
+    .mobile-nav { display: block; }
+    .main { padding-bottom: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-icon">F</div>
+    <div>
+      <div class="logo-text">Forex Scalping Pro</div>
+      <div class="logo-sub">30 Tahun Pengalaman</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="live-dot"></div>
+    <span class="live-label">Live</span>
+    <span id="top-clock">--:--:--</span>
+    <span style="font-size:11px;color:var(--text3)">WIB</span>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="nav-section">Trading</div>
+    <div class="nav-item active" onclick="go('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
+    <div class="nav-item" onclick="go('setup')"><span class="nav-icon">🎯</span> Setup & Entry</div>
+    <div class="nav-item" onclick="go('sesi')"><span class="nav-icon">🌍</span> Sesi Market</div>
+    <div class="nav-section">Tools</div>
+    <div class="nav-item" onclick="go('risk')"><span class="nav-icon">⚖️</span> Risk & Money</div>
+    <div class="nav-item" onclick="go('checklist')"><span class="nav-icon">✅</span> Pre-Trade</div>
+    <div class="nav-item" onclick="go('jurnal')"><span class="nav-icon">📒</span> Jurnal Trade</div>
+    <div class="nav-section">Referensi</div>
+    <div class="nav-item" onclick="go('rules')"><span class="nav-icon">📖</span> Golden Rules</div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="page-header">
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Ringkasan kondisi pasar dan performa trading hari ini</div>
+      </div>
+
+      <div class="grid4" id="dash-stats">
+        <div class="card card-sm">
+          <div class="card-title">Sesi Aktif</div>
+          <div class="card-val" id="d-sess" style="font-size:16px">—</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">Volatilitas</div>
+          <div class="card-val" id="d-vol" style="font-size:16px">—</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">Trade Hari Ini</div>
+          <div class="card-val" id="d-trades">0</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">Total Pip</div>
+          <div class="card-val" id="d-pips">0</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Status Sesi (WIB)</div>
+          <div id="mini-sess" style="margin-top:6px"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Rekomendasi Sekarang</div>
+          <div id="d-rec" style="margin-top:8px;font-size:13px;color:var(--text2);line-height:1.7"></div>
+        </div>
+      </div>
+
+      <div class="sec-label">Pair Fokus</div>
+      <div class="grid4">
+        <div class="card card-sm"><div class="card-title">EUR/USD</div><div style="font-size:13px;color:var(--text2)">Spread rendah · Likuiditas tinggi</div></div>
+        <div class="card card-sm"><div class="card-title">GBP/USD</div><div style="font-size:13px;color:var(--text2)">Volatilitas tinggi · London pair</div></div>
+        <div class="card card-sm"><div class="card-title">USD/JPY</div><div style="font-size:13px;color:var(--text2)">Tokyo pair · Trend jelas</div></div>
+        <div class="card card-sm"><div class="card-title">XAU/USD</div><div style="font-size:13px;color:var(--text2)">Safe haven · Gerakan besar</div></div>
+      </div>
+    </div>
+
+    <!-- SETUP -->
+    <div class="panel" id="panel-setup">
+      <div class="page-header">
+        <div class="page-title">Setup & Entry</div>
+        <div class="page-sub">3 metode scalping dengan win rate tertinggi setelah 30 tahun riset</div>
+      </div>
+
+      <div class="sec-label">Timeframe</div>
+      <div class="tf-row">
+        <div class="tf-pill" onclick="setTF(this,'M1')">M1 <span style="font-size:10px;opacity:.6">Eksekusi</span></div>
+        <div class="tf-pill" onclick="setTF(this,'M5')">M5 <span style="font-size:10px;opacity:.6">Entry</span></div>
+        <div class="tf-pill active" onclick="setTF(this,'M15')">M15 <span style="font-size:10px;opacity:.6">Konfirmasi</span></div>
+        <div class="tf-pill" onclick="setTF(this,'H1')">H1 <span style="font-size:10px;opacity:.6">Bias</span></div>
+        <div class="tf-pill" onclick="setTF(this,'H4')">H4 <span style="font-size:10px;opacity:.6">Struktur</span></div>
+      </div>
+
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <span class="chart-pair">EUR/USD</span>
+          <span class="chart-tf" id="chart-tf-label">M15 · EMA Pullback Setup</span>
+        </div>
+        <canvas id="mainChart" height="180"></canvas>
+        <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--text3)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:16px;height:2px;background:#e07840"></span> EMA 20</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:16px;height:2px;background:#5b9bd6"></span> EMA 50</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="color:var(--green)">▲</span> Entry Signal</span>
+        </div>
+      </div>
+
+      <div class="sec-label">3 Setup Terbaik</div>
+
+      <div class="setup-card" onclick="toggleSetup(this)">
+        <div class="setup-head">
+          <span class="setup-name">① London / NY Open Breakout</span>
+          <span class="badge badge-orange">High Volatility</span>
+        </div>
+        <div class="rule"><span class="rule-dot"></span><span>Tunggu range Asia yang sempit terbentuk antara pukul 21.00–06.00 WIB</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Identifikasi high dan low range sebagai level kritis</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Masuk setelah candle breakout + close di luar range dengan volume spike</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Tunggu retest level yang dibreak, konfirmasi rejection candle</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>SL 1×ATR di balik level breakout, TP 2–3×ATR</span></div>
+      </div>
+
+      <div class="setup-card active" onclick="toggleSetup(this)">
+        <div class="setup-head">
+          <span class="setup-name">② EMA Pullback</span>
+          <span class="badge badge-green">Highest Win Rate</span>
+        </div>
+        <div class="rule"><span class="rule-dot"></span><span>Konfirmasi trend: harga di atas EMA 20 & 50 = bullish, di bawah = bearish</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Tunggu pullback menyentuh atau mendekati EMA 20</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Cari konfirmasi candle: pin bar, bullish/bearish engulfing, atau inside bar</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Entry searah trend utama, SL di bawah EMA 50 (atau swing low/high terdekat)</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Tidak masuk jika EMA 20 dan 50 sudah crossing (sideways)</span></div>
+      </div>
+
+      <div class="setup-card" onclick="toggleSetup(this)">
+        <div class="setup-head">
+          <span class="setup-name">③ Support / Resistance Flip</span>
+          <span class="badge badge-blue">Precision Entry</span>
+        </div>
+        <div class="rule"><span class="rule-dot"></span><span>Identifikasi level SR yang kuat — minimal 2–3 kali ditest sebelumnya</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Tunggu candle close yang tegas di atas resistance (atau di bawah support)</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Masuk saat harga kembali ke level lama (flip zone) untuk retest</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>Konfirmasi rejection candle di zona flip — jangan anticipate</span></div>
+        <div class="rule"><span class="rule-dot"></span><span>SL di balik zona flip + sedikit buffer, TP ke swing high/low berikutnya</span></div>
+      </div>
+
+      <div class="sec-label">Indikator yang Digunakan</div>
+      <div class="ind-row">
+        <div class="ind-pill">EMA 20 — Dynamic SR</div>
+        <div class="ind-pill">EMA 50 — Trend Filter</div>
+        <div class="ind-pill">Volume — Momentum</div>
+        <div class="ind-pill">ATR (14) — Volatilitas</div>
+      </div>
+
+      <div class="sec-label">Pair Direkomendasikan per Setup</div>
+      <div class="grid3">
+        <div class="card card-sm">
+          <div class="card-title">Breakout</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">GBP/USD · GBP/JPY<br>XAU/USD · EUR/USD</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">EMA Pullback</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">EUR/USD · USD/JPY<br>GBP/USD · AUD/USD</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">SR Flip</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">EUR/USD · USD/JPY<br>XAU/USD · USD/CHF</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SESI -->
+    <div class="panel" id="panel-sesi">
+      <div class="page-header">
+        <div class="page-title">Sesi Market</div>
+        <div class="page-sub">Jadwal sesi global dalam Waktu Indonesia Barat (WIB, UTC+7)</div>
+      </div>
+
+      <div class="grid2" style="margin-bottom:14px">
+        <div class="card">
+          <div class="card-title">Sesi Aktif Sekarang</div>
+          <div class="card-val" id="s-active" style="font-size:20px">—</div>
+          <div class="card-sub" id="s-desc">—</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Level Volatilitas</div>
+          <div class="card-val" id="s-vol" style="font-size:20px">—</div>
+          <div class="card-sub">Rekomendasi setup aktif</div>
+        </div>
+      </div>
+
+      <div class="sec-label">Status Sesi Real-Time</div>
+      <div class="card" style="margin-bottom:14px">
+        <div id="sess-list"></div>
+      </div>
+
+      <div class="sec-label">Overlay Sesi Terbaik</div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="tip-box" style="margin-bottom:0">
+          <p><strong>London–New York Overlap (19:00–23:00 WIB)</strong> adalah sesi paling optimal untuk scalping. Volume tertinggi, spread paling kompetitif, momentum paling kuat. Ini adalah 4 jam emas dalam sehari.</p>
+        </div>
+        <div style="height:12px"></div>
+        <div class="tip-box" style="margin-bottom:0">
+          <p><strong>Tokyo Open (07:00 WIB)</strong> bagus untuk pair JPY (USD/JPY, GBP/JPY). SR Flip sering bekerja dengan sangat baik di sini karena pergerakan lebih terstruktur.</p>
+        </div>
+      </div>
+
+      <div class="sec-label">Rekomendasi per Sesi</div>
+      <div id="sess-tips"></div>
+    </div>
+
+    <!-- RISK -->
+    <div class="panel" id="panel-risk">
+      <div class="page-header">
+        <div class="page-title">Risk & Money Management</div>
+        <div class="page-sub">Kalkulator posisi dan aturan manajemen modal</div>
+      </div>
+
+      <div class="sec-label">Kalkulator Position Size</div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="form-row">
+          <span class="form-label">Balance ($)</span>
+          <input type="number" id="r-bal" value="1000" style="width:120px" oninput="calcRisk()">
+        </div>
+        <div class="form-row">
+          <span class="form-label">Risk per Trade</span>
+          <input type="range" id="r-pct" min="0.1" max="5" step="0.1" value="1" oninput="calcRisk()">
+          <span id="r-pct-val" style="min-width:40px;text-align:right;color:var(--accent);font-weight:600">1.0%</span>
+        </div>
+        <div class="form-row">
+          <span class="form-label">Stop Loss (pip)</span>
+          <input type="number" id="r-sl" value="15" style="width:100px" oninput="calcRisk()">
+        </div>
+        <div class="form-row">
+          <span class="form-label">Take Profit (pip)</span>
+          <input type="number" id="r-tp" value="30" style="width:100px" oninput="calcRisk()">
+        </div>
+        <div class="divider"></div>
+        <div class="result-grid">
+          <div class="result-cell"><div class="result-label">Risk ($)</div><div class="result-val" id="r-dollar">$10.00</div></div>
+          <div class="result-cell"><div class="result-label">Reward ($)</div><div class="result-val" id="r-reward">$20.00</div></div>
+          <div class="result-cell"><div class="result-label">R:R Ratio</div><div class="result-val" id="r-ratio">1 : 2.0</div></div>
+          <div class="result-cell"><div class="result-label">Lot Size (std)</div><div class="result-val" id="r-lot">0.067</div></div>
+        </div>
+        <div id="r-warning" style="margin-top:10px;font-size:12px;color:var(--red);display:none">⚠️ Risk lebih dari 2% sangat berbahaya untuk akun scalping!</div>
+      </div>
+
+      <div class="sec-label">Aturan Money Management</div>
+      <div class="grid2" style="margin-bottom:14px">
+        <div class="card card-sm">
+          <div class="card-title">Risk per Trade</div>
+          <div class="card-val">≤ 1%</div>
+          <div class="card-sub">Maks 2% untuk setup A+</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">Max Drawdown/Hari</div>
+          <div class="card-val">3%</div>
+          <div class="card-sub">Stop trading bila tercapai</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">Max Trade/Hari</div>
+          <div class="card-val">3–5</div>
+          <div class="card-sub">Kualitas > kuantitas</div>
+        </div>
+        <div class="card card-sm">
+          <div class="card-title">Min R:R Ratio</div>
+          <div class="card-val">1 : 2</div>
+          <div class="card-sub">Target ideal 1 : 3</div>
+        </div>
+      </div>
+
+      <div class="sec-label">Break-Even Calculator</div>
+      <div class="card">
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Berapa win rate minimum yang dibutuhkan?</div>
+        <div class="form-row">
+          <span class="form-label">R:R Ratio</span>
+          <input type="number" id="be-rr" value="2" step="0.1" style="width:100px" oninput="calcBE()">
+          <span style="font-size:13px;color:var(--text2)">: 1</span>
+        </div>
+        <div style="margin-top:10px;display:flex;align-items:baseline;gap:8px">
+          <span style="font-size:13px;color:var(--text2)">Win rate minimum:</span>
+          <span id="be-result" style="font-size:22px;font-weight:600;color:var(--accent)">33.3%</span>
+        </div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px">Dengan R:R ini kamu tetap profit meski hanya menang <span id="be-trades">33</span> dari 100 trade</div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="panel" id="panel-checklist">
+      <div class="page-header">
+        <div class="page-title">Pre-Trade Checklist</div>
+        <div class="page-sub">Lakukan semua ini sebelum membuka posisi — disiplin membedakan trader profit dari yang tidak</div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text)"><span id="cl-done">0</span> / <span id="cl-total">0</span> selesai</div>
+            <div class="prog-wrap" style="width:200px"><div class="prog-fill" id="cl-prog" style="width:0%"></div></div>
+          </div>
+          <button class="btn btn-danger" onclick="resetCL()" style="font-size:12px">Reset</button>
+        </div>
+      </div>
+
+      <div class="sec-label">📋 Sebelum Membuka Chart</div>
+      <div class="card" style="margin-bottom:12px" id="cl-pre"></div>
+
+      <div class="sec-label">🔍 Saat Analisis</div>
+      <div class="card" style="margin-bottom:12px" id="cl-analysis"></div>
+
+      <div class="sec-label">⚡ Saat Entry</div>
+      <div class="card" style="margin-bottom:12px" id="cl-entry"></div>
+
+      <div class="sec-label">🧠 Psikologi</div>
+      <div class="card" id="cl-psych"></div>
+    </div>
+
+    <!-- JURNAL -->
+    <div class="panel" id="panel-jurnal">
+      <div class="page-header">
+        <div class="page-title">Jurnal Trading</div>
+        <div class="page-sub">Catat setiap trade — evaluasi mingguan adalah kunci konsistensi</div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <select id="j-pair" style="flex:1;min-width:110px">
+            <option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option>
+            <option>XAU/USD</option><option>GBP/JPY</option><option>AUD/USD</option>
+          </select>
+          <select id="j-setup" style="flex:1;min-width:120px">
+            <option>Breakout</option><option>EMA Pullback</option><option>SR Flip</option>
+          </select>
+          <select id="j-dir" style="width:90px">
+            <option>BUY</option><option>SELL</option>
+          </select>
+          <input type="number" id="j-pips" placeholder="Pip (±)" style="width:90px">
+          <button class="btn btn-accent" onclick="addTrade()">+ Tambah</button>
+        </div>
+      </div>
+
+      <div class="grid4" style="margin-bottom:14px">
+        <div class="card card-sm"><div class="card-title">Win Rate</div><div class="card-val" id="j-wr">—</div></div>
+        <div class="card card-sm"><div class="card-title">Total Pip</div><div class="card-val" id="j-pip">0</div></div>
+        <div class="card card-sm"><div class="card-title">Jumlah Trade</div><div class="card-val" id="j-cnt">0</div></div>
+        <div class="card card-sm"><div class="card-title">Avg Pip/Trade</div><div class="card-val" id="j-avg">—</div></div>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead><tr><th>#</th><th>Pair</th><th>Setup</th><th>Arah</th><th>Pip</th><th></th></tr></thead>
+          <tbody id="j-body">
+            <tr><td colspan="6" style="color:var(--text3);padding:16px 10px;text-align:center">Belum ada trade. Mulai catat trade pertamamu.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- GOLDEN RULES -->
+    <div class="panel" id="panel-rules">
+      <div class="page-header">
+        <div class="page-title">Golden Rules</div>
+        <div class="page-sub">Prinsip-prinsip yang tidak boleh dilanggar — pelajaran dari 30 tahun di pasar</div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">🛡️</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Capital Preservation</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">Modal adalah senjatamu. Trader yang modalnya habis tidak bisa trading lagi. Jaga modal sebelum memikirkan profit.</div>
+        </div>
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">📐</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Selalu Gunakan Stop Loss</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">Tidak ada setup yang 100%. Stop loss adalah biaya bisnis, bukan kekalahan. Trader tanpa SL adalah penjudi.</div>
+        </div>
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">⏳</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Sabar Adalah Keunggulan</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">"The best trade is often no trade." Menunggu setup A+ dan melewatkan 10 setup jelek lebih baik dari masuk sembarangan.</div>
+        </div>
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">🚫</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Tidak Ada Revenge Trading</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">Setelah loss, beri jeda 15 menit sebelum menganalisis lagi. Emosi adalah musuh terbesar trader — bukan market.</div>
+        </div>
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">📒</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Jurnal Setiap Trade</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">Trader yang tidak mencatat trade tidak bisa berkembang. Evaluasi mingguan adalah cermin untuk perbaikan.</div>
+        </div>
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">🔬</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Satu Metode, Kuasai Dalam</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">Trader yang ganti-ganti strategi tidak akan pernah konsisten. Kuasai satu metode sampai benar-benar hafal di bawah tekanan.</div>
+        </div>
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">📊</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Price Action Adalah Raja</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">Semua indikator hanya turunan dari price. Belajar membaca price action langsung adalah skill paling berharga dalam trading.</div>
+        </div>
+        <div class="card">
+          <div style="font-size:28px;margin-bottom:8px">🎯</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Konsistensi > Profit Besar</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">Target 3–5% per bulan secara konsisten lebih baik dari 30% bulan ini lalu -20% bulan depan. Compounding bekerja dengan konsistensi.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="tip-box">
+        <p><strong>"Setelah 30 tahun di pasar, satu hal yang paling aku sesali adalah tidak lebih disiplin di awal karir. Semua kerugian besar yang pernah aku alami bukan karena analisis yang salah — tapi karena melanggar rules yang sudah aku ketahui."</strong></p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <button class="mob-nav-btn active" onclick="go('dashboard')"><span class="icon">📊</span>Dashboard</button>
+    <button class="mob-nav-btn" onclick="go('setup')"><span class="icon">🎯</span>Setup</button>
+    <button class="mob-nav-btn" onclick="go('risk')"><span class="icon">⚖️</span>Risk</button>
+    <button class="mob-nav-btn" onclick="go('checklist')"><span class="icon">✅</span>Checklist</button>
+    <button class="mob-nav-btn" onclick="go('jurnal')"><span class="icon">📒</span>Jurnal</button>
+  </div>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+const PANELS = ['dashboard','setup','sesi','risk','checklist','jurnal','rules'];
+function go(name) {
+  PANELS.forEach(p => {
+    document.getElementById('panel-'+p).classList.toggle('active', p===name);
+  });
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.textContent.toLowerCase().includes(name==='dashboard'?'dashboard':name==='setup'?'setup':name==='sesi'?'sesi':name==='risk'?'risk':name==='checklist'?'pre':name==='jurnal'?'jurnal':name==='rules'?'golden':''));
+  });
+  document.querySelectorAll('.mob-nav-btn').forEach((btn,i) => {
+    const names = ['dashboard','setup','risk','checklist','jurnal'];
+    btn.classList.toggle('active', names[i]===name);
+  });
+  if(name==='dashboard') renderDashboard();
+  if(name==='sesi') renderSessions();
+  if(name==='setup') drawChart('M15');
+}
+
+// ===== CLOCK =====
+function getWIB() {
+  const now = new Date();
+  return new Date(now.getTime() + 7*3600000);
+}
+function wibHour() { return getWIB().getUTCHours(); }
+
+function updateClock() {
+  const wib = getWIB();
+  const h = String(wib.getUTCHours()).padStart(2,'0');
+  const m = String(wib.getUTCMinutes()).padStart(2,'0');
+  const s = String(wib.getUTCSeconds()).padStart(2,'0');
+  document.getElementById('top-clock').textContent = `${h}:${m}:${s}`;
+}
+
+// ===== SESSIONS =====
+const SESS = [
+  { name:'Sydney',   start:4,  end:13, color:'#9c9890', vol:'Rendah',        tip:'Hindari scalping, spread lebar, tunggu setup', setup:'Tidak direkomendasikan' },
+  { name:'Tokyo',    start:7,  end:16, color:'#5b9bd6', vol:'Sedang',         tip:'Bagus untuk JPY pairs, SR Flip bekerja baik', setup:'SR Flip pada USD/JPY, GBP/JPY' },
+  { name:'London',   start:14, end:23, color:'#e07840', vol:'Tinggi',         tip:'Sesi terbaik! Breakout & EMA Pullback optimal', setup:'Breakout + EMA Pullback' },
+  { name:'New York', start:19, end:4,  color:'#d4a853', vol:'Sangat Tinggi',  tip:'London-NY overlap 19–23 WIB adalah waktu emas', setup:'Semua setup aktif' },
+];
+
+function getActiveSess() {
+  const h = wibHour();
+  return SESS.filter(s => s.end > s.start ? (h >= s.start && h < s.end) : (h >= s.start || h < s.end));
+}
+
+function renderDashboard() {
+  const active = getActiveSess();
+  const main = active.length ? active[active.length-1] : { name:'Sepi', vol:'Sangat Rendah', color:'var(--text3)', tip:'Tidak ada sesi aktif, spread sangat lebar' };
+  document.getElementById('d-sess').textContent = main.name;
+  document.getElementById('d-sess').style.color = main.color;
+  document.getElementById('d-vol').textContent = main.vol;
+  document.getElementById('d-vol').style.color = main.color;
+  const miniSess = document.getElementById('mini-sess');
+  miniSess.innerHTML = SESS.map(s => {
+    const inSess = s.end > s.start ? (wibHour() >= s.start && wibHour() < s.end) : (wibHour() >= s.start || wibHour() < s.end);
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <div style="width:8px;height:8px;border-radius:50%;background:${s.color};opacity:${inSess?1:.3}"></div>
+      <span style="font-size:13px;color:${inSess?s.color:'var(--text3)'};font-weight:${inSess?600:400}">${s.name}</span>
+      <span style="font-size:11px;color:var(--text3);margin-left:auto">${String(s.start).padStart(2,'0')}:00–${String(s.end).padStart(2,'0')}:00</span>
+      ${inSess?`<span style="font-size:10px;background:rgba(76,175,118,.15);color:var(--green);padding:1px 6px;border-radius:99px">AKTIF</span>`:''}
+    </div>`;
+  }).join('');
+  const rec = document.getElementById('d-rec');
+  rec.innerHTML = `<strong style="color:${main.color}">${main.name}</strong> — ${main.vol}<br><span style="color:var(--text2)">${main.tip}</span>`;
+  renderJournalStats();
+}
+
+function renderSessions() {
+  const h = wibHour();
+  const active = getActiveSess();
+  const main = active.length ? active[active.length-1] : { name:'Tidak ada sesi', vol:'Sangat Rendah', color:'var(--text3)', tip:'Pasar sangat sepi' };
+  document.getElementById('s-active').textContent = main.name;
+  document.getElementById('s-active').style.color = main.color;
+  document.getElementById('s-vol').textContent = main.vol;
+  const sessList = document.getElementById('sess-list');
+  sessList.innerHTML = SESS.map(s => {
+    const inSess = s.end > s.start ? (h >= s.start && h < s.end) : (h >= s.start || h < s.end);
+    const dur = s.end > s.start ? s.end-s.start : 24-s.start+s.end;
+    const pct = Math.round((dur/12)*100);
+    return `<div class="sess-row">
+      <span class="sess-name" style="color:${s.color};font-weight:${inSess?600:400}">${s.name}</span>
+      <div class="sess-bar-wrap"><div class="sess-bar-fill" style="width:${pct}%;background:${s.color};opacity:${inSess?1:.25}"></div></div>
+      <span class="sess-time">${String(s.start).padStart(2,'0')}:00 – ${String(s.end).padStart(2,'0')}:00 WIB</span>
+      ${inSess ? `<span class="badge badge-green" style="font-size:10px">AKTIF</span>` : ''}
+    </div>`;
+  }).join('');
+  const tips = document.getElementById('sess-tips');
+  tips.innerHTML = SESS.map(s => `<div class="card" style="margin-bottom:8px;border-left:2px solid ${s.color}">
+    <div style="font-size:13px;font-weight:600;color:${s.color};margin-bottom:4px">${s.name} · ${String(s.start).padStart(2,'0')}:00–${String(s.end).padStart(2,'0')}:00 WIB</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:2px">${s.tip}</div>
+    <div style="font-size:11px;color:var(--text3)">Setup: ${s.setup}</div>
+  </div>`).join('');
+}
+
+// ===== CHART =====
+let currentTF = 'M15';
+function setTF(el, tf) {
+  document.querySelectorAll('.tf-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  currentTF = tf;
+  const labels = { M1:'M1 · Presisi Eksekusi', M5:'M5 · Timing Entry', M15:'M15 · EMA Pullback Setup', H1:'H1 · Konfirmasi Bias', H4:'H4 · Struktur Utama' };
+  document.getElementById('chart-tf-label').textContent = labels[tf];
+  drawChart(tf);
+}
+
+function drawChart(tf) {
+  const canvas = document.getElementById('mainChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.parentElement.offsetWidth - 32;
+  const H = 180;
+  canvas.width = W * (window.devicePixelRatio||1);
+  canvas.height = H * (window.devicePixelRatio||1);
+  canvas.style.width = W+'px'; canvas.style.height = H+'px';
+  ctx.scale(window.devicePixelRatio||1, window.devicePixelRatio||1);
+  ctx.clearRect(0,0,W,H);
+
+  // Seeded random for consistency
+  let seed = tf.charCodeAt(0)*37 + tf.charCodeAt(1);
+  function rand() { seed = (seed*9301+49297)%233280; return seed/233280; }
+
+  const n = 42;
+  const prices = [];
+  let p = 1.0840;
+  // Make a trending scenario for visual clarity
+  for(let i=0;i<n;i++){
+    const trend = i < 20 ? -0.0003 : 0.0005;
+    p += trend + (rand()-.5)*.0012;
+    prices.push(Math.max(1.0780, p));
+  }
+
+  function ema(data, period) {
+    const k=2/(period+1); let prev=data[0]; return data.map(v=>{ prev=v*k+prev*(1-k); return prev; });
+  }
+  const e20 = ema(prices,20), e50 = ema(prices,50);
+  const minP = Math.min(...prices)-.0008, maxP = Math.max(...prices)+.0008;
+  const scX = i => (i/(n-1))*(W-32)+16;
+  const scY = v => H - ((v-minP)/(maxP-minP))*(H-20) - 10;
+
+  // Grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth=0.5;
+  for(let i=0;i<4;i++){ const y=10+i*(H/4); ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+  // Candles
+  const bw = Math.max(3,(W-32)/n-2);
+  for(let i=1;i<n;i++){
+    const open=prices[i-1], close=prices[i];
+    const bull = close >= open;
+    ctx.fillStyle = bull ? '#3a7a52' : '#7a3a3a';
+    const x=scX(i), y1=scY(Math.max(open,close)), y2=scY(Math.min(open,close));
+    ctx.fillRect(x-bw/2, y1, bw, Math.max(1.5,y2-y1));
+    // Wick
+    ctx.strokeStyle = bull ? '#4caf76' : '#e05252'; ctx.lineWidth=0.8;
+    ctx.beginPath();
+    const wickH = (close-open)*0.3;
+    ctx.moveTo(x, y1); ctx.lineTo(x, y1-Math.abs(scY(open+wickH)-scY(open)));
+    ctx.moveTo(x, y2); ctx.lineTo(x, y2+Math.abs(scY(open+wickH)-scY(open)));
+    ctx.stroke();
+  }
+
+  // EMA 50
+  ctx.strokeStyle='#5b9bd6'; ctx.lineWidth=1.5; ctx.setLineDash([]);
+  ctx.beginPath(); e50.forEach((v,i)=>i?ctx.lineTo(scX(i),scY(v)):ctx.moveTo(scX(i),scY(v))); ctx.stroke();
+
+  // EMA 20
+  ctx.strokeStyle='#e07840'; ctx.lineWidth=1.5;
+  ctx.beginPath(); e20.forEach((v,i)=>i?ctx.lineTo(scX(i),scY(v)):ctx.moveTo(scX(i),scY(v))); ctx.stroke();
+
+  // Entry signal (pullback to EMA20 zone)
+  const entryIdx = 35;
+  const ex = scX(entryIdx), ey = scY(e20[entryIdx]) + 16;
+  ctx.fillStyle = '#4caf76';
+  ctx.beginPath(); ctx.moveTo(ex,ey-10); ctx.lineTo(ex-5,ey); ctx.lineTo(ex+5,ey); ctx.fill();
+  ctx.font = 'bold 10px sans-serif'; ctx.fillStyle='#4caf76'; ctx.fillText('BUY', ex-8, ey+11);
+
+  // Labels
+  ctx.font='10px sans-serif';
+  ctx.fillStyle='#e07840'; ctx.fillText('EMA 20', W-50, scY(e20[n-1])-4);
+  ctx.fillStyle='#5b9bd6'; ctx.fillText('EMA 50', W-50, scY(e50[n-1])+12);
+}
+
+// ===== SETUP TOGGLE =====
+function toggleSetup(el) {
+  document.querySelectorAll('.setup-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ===== RISK CALC =====
+function calcRisk() {
+  const bal = parseFloat(document.getElementById('r-bal').value)||1000;
+  const pct = parseFloat(document.getElementById('r-pct').value)||1;
+  const sl  = parseFloat(document.getElementById('r-sl').value)||15;
+  const tp  = parseFloat(document.getElementById('r-tp').value)||30;
+  document.getElementById('r-pct-val').textContent = pct.toFixed(1)+'%';
+  const riskD = bal*pct/100;
+  const rewD  = riskD*(tp/sl);
+  const lot   = (riskD/(sl*10)).toFixed(3);
+  const ratio = (tp/sl).toFixed(1);
+  document.getElementById('r-dollar').textContent = '$'+riskD.toFixed(2);
+  document.getElementById('r-reward').textContent = '$'+rewD.toFixed(2);
+  document.getElementById('r-ratio').textContent  = '1 : '+ratio;
+  document.getElementById('r-lot').textContent    = lot;
+  document.getElementById('r-dollar').style.color = pct > 2 ? 'var(--red)' : 'var(--text)';
+  document.getElementById('r-warning').style.display = pct > 2 ? 'block' : 'none';
+}
+
+function calcBE() {
+  const rr = parseFloat(document.getElementById('be-rr').value)||2;
+  const winRate = 1/(1+rr)*100;
+  document.getElementById('be-result').textContent = winRate.toFixed(1)+'%';
+  document.getElementById('be-trades').textContent = Math.round(winRate);
+}
+
+// ===== CHECKLIST =====
+const CL_DATA = {
+  'cl-pre': [
+    'Cek kalender ekonomi — ada news besar hari ini?',
+    'Cek spread broker (harus < 3 pip untuk major pair)',
+    'Tentukan bias harian: bullish, bearish, atau sideways?',
+    'Review jurnal trade kemarin — ada pola yang perlu diperbaiki?',
+  ],
+  'cl-analysis': [
+    'Tandai level SR utama di timeframe H1 atau H4',
+    'Cek posisi harga terhadap EMA 20 dan EMA 50',
+    'Konfirmasi sesi trading aktif dan volatilitas saat ini',
+    'Hitung ATR(14) untuk menentukan target SL dan TP',
+    'Identifikasi setup yang paling relevan (Breakout/Pullback/SR Flip)',
+  ],
+  'cl-entry': [
+    'Setup sesuai salah satu dari 3 metode utama?',
+    'Risk per trade sudah dihitung, tidak lebih dari 1–2%?',
+    'R:R ratio minimal 1:2 sebelum entry?',
+    'Drawdown harian belum mencapai 3% dari balance?',
+    'Spread saat ini masih dalam batas wajar?',
+  ],
+  'cl-psych': [
+    'Tidak sedang dalam kondisi emosi (marah, euphoria, panik)?',
+    'Tidak ada target "balik modal" atau target keuntungan paksa',
+    'Sudah siap menerima loss jika SL terkena?',
+    'Tidak akan revenge trade setelah loss',
+  ],
+};
+const clState = {};
+
+function buildChecklist() {
+  let total = 0;
+  Object.entries(CL_DATA).forEach(([id,items]) => {
+    const el = document.getElementById(id);
+    el.innerHTML = items.map((txt,i) => {
+      const key = id+'_'+i;
+      if(!(key in clState)) clState[key]=false;
+      total++;
+      return `<div class="check-item" onclick="toggleCheck('${key}')">
+        <div class="check-box ${clState[key]?'on':''}" id="cb-${key}"></div>
+        <span class="check-text ${clState[key]?'done':''}" id="ct-${key}">${txt}</span>
+      </div>`;
+    }).join('');
+  });
+  document.getElementById('cl-total').textContent = total;
+  updateClProg();
+}
+function toggleCheck(key) {
+  clState[key] = !clState[key];
+  document.getElementById('cb-'+key).className='check-box '+(clState[key]?'on':'');
+  document.getElementById('ct-'+key).className='check-text '+(clState[key]?'done':'');
+  updateClProg();
+}
+function updateClProg() {
+  const total = Object.keys(clState).length;
+  const done  = Object.values(clState).filter(Boolean).length;
+  const pct   = total ? Math.round(done/total*100) : 0;
+  document.getElementById('cl-prog').style.width = pct+'%';
+  document.getElementById('cl-done').textContent = done;
+}
+function resetCL() { Object.keys(clState).forEach(k=>clState[k]=false); buildChecklist(); }
+
+// ===== JOURNAL =====
+const trades = JSON.parse(localStorage.getItem('fsp_trades')||'[]');
+function saveTrades() { try { localStorage.setItem('fsp_trades', JSON.stringify(trades)); } catch(e){} }
+
+function addTrade() {
+  const pair  = document.getElementById('j-pair').value;
+  const setup = document.getElementById('j-setup').value;
+  const dir   = document.getElementById('j-dir').value;
+  const pips  = parseFloat(document.getElementById('j-pips').value);
+  if(isNaN(pips)) { document.getElementById('j-pips').style.borderColor='var(--red)'; setTimeout(()=>document.getElementById('j-pips').style.borderColor='',1500); return; }
+  trades.unshift({ pair, setup, dir, pips, date: new Date().toLocaleDateString('id-ID') });
+  document.getElementById('j-pips').value='';
+  saveTrades();
+  renderJournal();
+}
+
+function removeTrade(i) { trades.splice(i,1); saveTrades(); renderJournal(); }
+
+function renderJournal() {
+  const wins = trades.filter(t=>t.pips>0).length;
+  const totalPip = trades.reduce((a,t)=>a+t.pips,0);
+  const avgPip = trades.length ? totalPip/trades.length : 0;
+  const wr = trades.length ? Math.round(wins/trades.length*100)+'%' : '—';
+  document.getElementById('j-wr').textContent  = wr;
+  document.getElementById('j-wr').style.color  = trades.length ? (wins/trades.length >= .5 ? 'var(--green)' : 'var(--red)') : 'var(--text)';
+  document.getElementById('j-pip').textContent = (totalPip>=0?'+':'')+totalPip.toFixed(1);
+  document.getElementById('j-pip').style.color = totalPip>=0?'var(--green)':'var(--red)';
+  document.getElementById('j-cnt').textContent = trades.length;
+  document.getElementById('j-avg').textContent = trades.length ? (avgPip>=0?'+':'')+avgPip.toFixed(1) : '—';
+  document.getElementById('j-avg').style.color = avgPip>=0?'var(--green)':'var(--red)';
+  const tbody = document.getElementById('j-body');
+  if(!trades.length){ tbody.innerHTML='<tr><td colspan="6" style="color:var(--text3);padding:16px 10px;text-align:center">Belum ada trade. Mulai catat trade pertamamu.</td></tr>'; return; }
+  tbody.innerHTML = trades.map((t,i)=>`<tr>
+    <td style="color:var(--text3)">${trades.length-i}</td>
+    <td>${t.pair}</td>
+    <td style="color:var(--text2)">${t.setup}</td>
+    <td><span class="badge ${t.dir==='BUY'?'badge-green':'badge-red'}">${t.dir}</span></td>
+    <td style="color:${t.pips>=0?'var(--green)':'var(--red)'};font-weight:600">${t.pips>=0?'+':''}${t.pips}</td>
+    <td><button onclick="removeTrade(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px">✕</button></td>
+  </tr>`).join('');
+}
+
+function renderJournalStats() {
+  const wins = trades.filter(t=>t.pips>0).length;
+  const totalPip = trades.reduce((a,t)=>a+t.pips,0);
+  document.getElementById('d-trades').textContent = trades.length;
+  document.getElementById('d-pips').textContent = (totalPip>=0?'+':'')+totalPip.toFixed(1);
+  document.getElementById('d-pips').style.color = totalPip>=0?'var(--green)':'var(--red)';
+}
+
+// ===== INIT =====
+updateClock(); setInterval(updateClock,1000);
+renderDashboard(); setInterval(renderDashboard,60000);
+buildChecklist();
+renderJournal();
+drawChart('M15');
+</script>
+</body>
+</html>
