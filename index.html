@@ -40,6 +40,7 @@
       font-size: 14px;
     }
 
+    /* TOPBAR */
     .topbar {
       background: var(--bg2);
       border-bottom: 1px solid var(--border);
@@ -115,6 +116,7 @@
       color: var(--accent);
     }
 
+    /* LAYOUT */
     .layout {
       display: flex;
       height: calc(100vh - 56px);
@@ -197,6 +199,7 @@
       margin-top: 3px;
     }
 
+    /* CARDS */
     .card {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -228,6 +231,7 @@
       margin-top: 2px;
     }
 
+    /* GRID */
     .grid2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -256,6 +260,7 @@
       margin-bottom: 14px;
     }
 
+    /* BADGES */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -304,6 +309,7 @@
       margin: 18px 0 10px;
     }
 
+    /* SETUP CARDS */
     .setup-card {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -329,6 +335,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .setup-name {
@@ -355,14 +363,17 @@
       margin-top: 7px;
     }
 
-    .pair-row {
+    /* PAIR & TF PILLS */
+    .pair-row,
+    .tf-row {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
       margin-bottom: 10px;
     }
 
-    .pair-pill {
+    .pair-pill,
+    .tf-pill {
       padding: 5px 12px;
       border: 1px solid var(--border);
       border-radius: 99px;
@@ -371,42 +382,16 @@
       color: var(--text2);
       font-weight: 500;
       transition: all .15s;
+      white-space: nowrap;
     }
 
-    .pair-pill:hover {
-      border-color: var(--border2);
-      color: var(--text);
-    }
-
-    .pair-pill.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #0f0f0f;
-      font-weight: 600;
-    }
-
-    .tf-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .tf-pill {
-      padding: 5px 12px;
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      font-size: 12px;
-      cursor: pointer;
-      color: var(--text2);
-      transition: all .15s;
-    }
-
+    .pair-pill:hover,
     .tf-pill:hover {
       border-color: var(--border2);
       color: var(--text);
     }
 
+    .pair-pill.active,
     .tf-pill.active {
       background: var(--accent);
       border-color: var(--accent);
@@ -414,6 +399,7 @@
       font-weight: 600;
     }
 
+    /* ===== CHART ===== */
     .chart-wrap {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -426,31 +412,126 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .chart-pair-label {
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.01em;
     }
 
     #tv-container {
       width: 100%;
-      height: 380px;
+      height: 500px;
       background: var(--bg4);
     }
 
     .chart-footer {
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
+    /* FULLSCREEN CHART MODAL (mobile) */
+    .chart-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: var(--bg);
+      flex-direction: column;
+    }
+
+    .chart-modal.open {
+      display: flex;
+    }
+
+    .chart-modal-bar {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .chart-modal-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-right: auto;
+    }
+
+    #tv-fullscreen-container {
+      flex: 1;
+      min-height: 0;
+    }
+
+    #tv-fullscreen-widget {
+      height: 100%;
+      width: 100%;
+    }
+
+    .modal-pair-row,
+    .modal-tf-row {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .modal-pill {
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      font-size: 11px;
+      cursor: pointer;
+      color: var(--text2);
+      white-space: nowrap;
+      background: var(--bg3);
+    }
+
+    .modal-pill.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0f0f0f;
+      font-weight: 600;
+    }
+
+    .close-modal-btn {
+      padding: 6px 12px;
+      background: var(--bg4);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* MOBILE: show expand button, hide on desktop */
+    .expand-chart-btn {
+      display: none;
+      width: 100%;
+      padding: 10px;
+      background: var(--bg4);
+      border: none;
+      border-top: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: .02em;
+    }
+
+    /* SESSIONS */
     .sess-row {
       display: flex;
       align-items: center;
@@ -485,6 +566,7 @@
       text-align: right;
     }
 
+    /* FORM */
     .form-row {
       display: flex;
       gap: 10px;
@@ -565,6 +647,7 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* CHECKLIST */
     .check-item {
       display: flex;
       align-items: center;
@@ -625,6 +708,7 @@
       transition: width .3s;
     }
 
+    /* TABLE */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -656,6 +740,7 @@
       background: rgba(255, 255, 255, .02);
     }
 
+    /* BUTTONS */
     .btn {
       padding: 8px 16px;
       border-radius: var(--radius);
@@ -702,24 +787,6 @@
       margin: 16px 0;
     }
 
-    .tip-box {
-      background: rgba(212, 168, 83, .07);
-      border: 1px solid rgba(212, 168, 83, .2);
-      border-radius: var(--radius);
-      padding: 12px 14px;
-      margin-bottom: 10px;
-    }
-
-    .tip-box p {
-      font-size: 13px;
-      color: var(--text2);
-      line-height: 1.6;
-    }
-
-    .tip-box strong {
-      color: var(--accent);
-    }
-
     .ind-pill {
       padding: 5px 12px;
       background: var(--bg4);
@@ -731,7 +798,7 @@
       margin: 0 4px 4px 0;
     }
 
-    /* JOURNAL INPUT */
+    /* JOURNAL */
     .j-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -745,7 +812,7 @@
       margin-bottom: 3px;
     }
 
-    /* TAB ROW */
+    /* HISTORIS TABS */
     .tab-row {
       display: flex;
       gap: 4px;
@@ -774,58 +841,7 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
     }
 
-    /* MOBILE */
-    @media(max-width:640px) {
-      .sidebar {
-        display: none;
-      }
-
-      .grid3,
-      .grid4,
-      .grid5 {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .main {
-        padding: 16px;
-        padding-bottom: 80px;
-      }
-
-      .topbar {
-        padding: 0 14px;
-      }
-
-      .logo-sub {
-        display: none;
-      }
-
-      #tv-container {
-        height: 260px;
-      }
-
-      .j-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media(max-width:400px) {
-
-      .grid3,
-      .grid4,
-      .grid5 {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--border2);
-      border-radius: 2px;
-    }
-
+    /* MOBILE NAV */
     .mobile-nav {
       display: none;
       position: fixed;
@@ -886,7 +902,7 @@
       background: var(--bg2);
       border-top: 1px solid var(--border2);
       border-radius: 18px 18px 0 0;
-      padding: 12px 0 32px;
+      padding: 12px 0 36px;
       z-index: 201;
       transform: translateY(100%);
       transition: transform .25s cubic-bezier(.4, 0, .2, 1);
@@ -917,7 +933,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 13px 20px;
+      padding: 14px 20px;
       cursor: pointer;
       color: var(--text2);
       font-size: 14px;
@@ -938,14 +954,71 @@
       text-align: center;
     }
 
+    /* RESPONSIVE */
     @media(max-width:640px) {
-      .mobile-nav {
-        display: block;
+      .sidebar {
+        display: none;
+      }
+
+      .grid3,
+      .grid4,
+      .grid5 {
+        grid-template-columns: 1fr 1fr;
       }
 
       .main {
-        padding-bottom: 72px;
+        padding: 12px;
+        padding-bottom: 74px;
       }
+
+      .topbar {
+        padding: 0 14px;
+      }
+
+      .logo-sub {
+        display: none;
+      }
+
+      /* chart on mobile */
+      #tv-container {
+        height: 220px;
+      }
+
+      .expand-chart-btn {
+        display: block;
+      }
+
+      .chart-footer {
+        display: none;
+      }
+
+      /* journal grid */
+      .j-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* mobile nav */
+      .mobile-nav {
+        display: block;
+      }
+    }
+
+    @media(max-width:400px) {
+
+      .grid3,
+      .grid4,
+      .grid5 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 2px;
     }
   </style>
   <!-- Paste ini di dalam <head> sebelum </head> -->
@@ -960,6 +1033,7 @@
 
 <body>
 
+  <!-- TOPBAR -->
   <div class="topbar">
     <div class="logo">
       <div class="logo-icon">F</div>
@@ -977,6 +1051,7 @@
   </div>
 
   <div class="layout">
+    <!-- SIDEBAR -->
     <nav class="sidebar">
       <div class="nav-section">Trading</div>
       <div class="nav-item active" onclick="go('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
@@ -1048,15 +1123,16 @@
         </div>
       </div>
 
-      <!-- SETUP & ENTRY dengan Real-Time Chart -->
+      <!-- SETUP & ENTRY -->
       <div class="panel" id="panel-setup">
         <div class="page-header">
           <div class="page-title">Setup & Entry</div>
-          <div class="page-sub">Chart real-time langsung dari pasar + 3 metode scalping terbukti</div>
+          <div class="page-sub">Chart real-time + 3 metode scalping terbukti</div>
         </div>
 
+        <!-- Pair & TF — desktop -->
         <div class="sec-label">Pilih Pair</div>
-        <div class="pair-row">
+        <div class="pair-row" id="desktop-pair-row">
           <div class="pair-pill active" onclick="setPair(this,'EURUSD','EUR/USD')">EUR/USD</div>
           <div class="pair-pill" onclick="setPair(this,'GBPUSD','GBP/USD')">GBP/USD</div>
           <div class="pair-pill" onclick="setPair(this,'USDJPY','USD/JPY')">USD/JPY</div>
@@ -1066,9 +1142,8 @@
           <div class="pair-pill" onclick="setPair(this,'USDCHF','USD/CHF')">USD/CHF</div>
           <div class="pair-pill" onclick="setPair(this,'USDCAD','USD/CAD')">USD/CAD</div>
         </div>
-
         <div class="sec-label">Timeframe</div>
-        <div class="tf-row">
+        <div class="tf-row" id="desktop-tf-row">
           <div class="tf-pill" onclick="setTF(this,'1')">M1</div>
           <div class="tf-pill" onclick="setTF(this,'5')">M5</div>
           <div class="tf-pill active" onclick="setTF(this,'15')">M15</div>
@@ -1077,23 +1152,30 @@
           <div class="tf-pill" onclick="setTF(this,'D')">D1</div>
         </div>
 
+        <!-- CHART -->
         <div class="chart-wrap">
           <div class="chart-toolbar">
             <div>
               <div class="chart-pair-label" id="chart-pair-label">EUR/USD</div>
               <div style="font-size:11px;color:var(--text3);margin-top:2px">Chart real-time via TradingView</div>
             </div>
-            <div style="display:flex;align-items:center;gap:6px">
-              <div class="live-dot"></div>
-              <span style="font-size:12px;color:var(--green);font-weight:600">LIVE</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="display:flex;align-items:center;gap:5px;">
+                <div class="live-dot"></div>
+                <span style="font-size:12px;color:var(--green);font-weight:600">LIVE</span>
+              </div>
             </div>
           </div>
           <div id="tv-container">
             <div id="tv-widget" style="height:100%;width:100%"></div>
           </div>
+          <!-- Tombol expand — hanya muncul di HP -->
+          <button class="expand-chart-btn" onclick="openChartModal()">
+            ⛶ Buka Chart Layar Penuh
+          </button>
           <div class="chart-footer">
-            <span style="font-size:11px;color:var(--text3)">EMA 20 &amp; EMA 50 aktif di chart · Klik Indicators untuk
-              tambah indikator lain</span>
+            <span style="font-size:11px;color:var(--text3)">EMA 20 & EMA 50 · Klik Indicators untuk tambah indikator
+              lain</span>
             <span style="font-size:11px;color:var(--accent)">Powered by TradingView</span>
           </div>
         </div>
@@ -1103,37 +1185,35 @@
           <div class="setup-head"><span class="setup-name">① London / NY Open Breakout</span><span
               class="badge badge-orange">High Volatility</span></div>
           <div class="rule"><span class="rule-dot"></span><span>Tunggu range Asia sempit (21.00–06.00 WIB), identifikasi
-              high/low range</span></div>
+              high/low</span></div>
           <div class="rule"><span class="rule-dot"></span><span>Masuk setelah candle breakout + close di luar range
               dengan volume spike</span></div>
           <div class="rule"><span class="rule-dot"></span><span>Tunggu retest level yang dibreak, konfirmasi rejection
               candle</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>SL 1×ATR di balik breakout level, TP 2–3×ATR</span>
-          </div>
+          <div class="rule"><span class="rule-dot"></span><span>SL 1×ATR di balik breakout, TP 2–3×ATR</span></div>
         </div>
         <div class="setup-card active" onclick="toggleSetup(this)">
           <div class="setup-head"><span class="setup-name">② EMA Pullback</span><span class="badge badge-green">Highest
               Win Rate</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>Konfirmasi trend: harga di atas EMA 20 & 50 = bullish,
-              di bawah = bearish</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>Tunggu pullback menyentuh EMA 20, cari rejection candle
-              (pin bar/engulfing)</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>Entry searah trend utama, SL di bawah EMA 50</span>
+          <div class="rule"><span class="rule-dot"></span><span>Konfirmasi trend: harga di atas EMA 20 & 50 =
+              bullish</span></div>
+          <div class="rule"><span class="rule-dot"></span><span>Tunggu pullback ke EMA 20, cari pin bar atau
+              engulfing</span></div>
+          <div class="rule"><span class="rule-dot"></span><span>Entry searah trend, SL di bawah EMA 50</span></div>
+          <div class="rule"><span class="rule-dot"></span><span>Tidak masuk jika EMA 20 dan 50 sudah crossing</span>
           </div>
-          <div class="rule"><span class="rule-dot"></span><span>Tidak masuk jika EMA 20 dan 50 sudah crossing
-              (sideways)</span></div>
         </div>
         <div class="setup-card" onclick="toggleSetup(this)">
           <div class="setup-head"><span class="setup-name">③ Support / Resistance Flip</span><span
               class="badge badge-blue">Precision Entry</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>Identifikasi level SR kuat — minimal 2–3 kali ditest
+          <div class="rule"><span class="rule-dot"></span><span>Level SR kuat — minimal 2–3 kali ditest
               sebelumnya</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>Tunggu candle close tegas di atas resistance / di bawah
+          <div class="rule"><span class="rule-dot"></span><span>Tunggu close tegas di atas resistance / di bawah
               support</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>Masuk saat retest ke zona flip, konfirmasi rejection
-              candle</span></div>
-          <div class="rule"><span class="rule-dot"></span><span>SL di balik zona flip + buffer kecil, TP ke swing
-              high/low berikutnya</span></div>
+          <div class="rule"><span class="rule-dot"></span><span>Masuk saat retest zona flip, konfirmasi rejection</span>
+          </div>
+          <div class="rule"><span class="rule-dot"></span><span>SL di balik zona flip + buffer, TP ke swing
+              berikutnya</span></div>
         </div>
 
         <div class="sec-label">Indikator Wajib</div>
@@ -1262,7 +1342,6 @@
           <div class="page-title">Jurnal Trading</div>
           <div class="page-sub">Catat setiap trade lengkap dengan tanggal dan hasil</div>
         </div>
-
         <div class="card" style="margin-bottom:14px">
           <div
             style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">
@@ -1297,8 +1376,7 @@
           </div>
           <div class="j-grid">
             <div>
-              <div class="j-label">Result</div>
-              <select id="j-result" style="width:100%">
+              <div class="j-label">Result</div><select id="j-result" style="width:100%">
                 <option value="win">✅ Win</option>
                 <option value="loss">❌ Loss</option>
                 <option value="be">➖ Break Even</option>
@@ -1313,13 +1391,11 @@
             </div>
           </div>
           <div style="margin-bottom:10px">
-            <div class="j-label">Catatan (opsional)</div>
-            <input type="text" id="j-note" placeholder="Alasan entry, kondisi market, emosi saat trading..."
-              style="width:100%">
+            <div class="j-label">Catatan (opsional)</div><input type="text" id="j-note"
+              placeholder="Alasan entry, kondisi market, emosi..." style="width:100%">
           </div>
           <button class="btn btn-accent" style="width:100%" onclick="addTrade()">+ Tambah Trade</button>
         </div>
-
         <div class="grid5" style="margin-bottom:14px">
           <div class="card card-sm">
             <div class="card-title">Win Rate</div>
@@ -1342,7 +1418,6 @@
             <div class="card-val" id="j-losses" style="color:var(--red)">0</div>
           </div>
         </div>
-
         <div class="card">
           <div
             style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
@@ -1382,14 +1457,12 @@
         </div>
       </div>
 
-      <!-- HISTORIS TRADE -->
+      <!-- HISTORIS -->
       <div class="panel" id="panel-historis">
         <div class="page-header">
           <div class="page-title">Historis Trade</div>
           <div class="page-sub">Analisis mendalam performa dari semua trade yang tercatat</div>
         </div>
-
-        <!-- FILTER -->
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center">
           <select id="h-pair" onchange="renderHistoris()" style="font-size:12px">
             <option value="all">Semua Pair</option>
@@ -1408,14 +1481,12 @@
           </select>
           <select id="h-period" onchange="renderHistoris()" style="font-size:12px">
             <option value="all">Semua Waktu</option>
-            <option value="7">7 Hari Terakhir</option>
-            <option value="30">30 Hari Terakhir</option>
-            <option value="90">90 Hari Terakhir</option>
+            <option value="7">7 Hari</option>
+            <option value="30">30 Hari</option>
+            <option value="90">90 Hari</option>
           </select>
           <button class="btn btn-sm" onclick="resetHFilter()">Reset</button>
         </div>
-
-        <!-- METRICS -->
         <div class="grid4" style="margin-bottom:14px">
           <div class="card card-sm">
             <div class="card-title">Total Trade</div>
@@ -1434,16 +1505,12 @@
             <div class="card-val" id="h-avg">—</div>
           </div>
         </div>
-
-        <!-- TABS -->
         <div class="tab-row">
-          <button class="tab-btn active" onclick="switchHTab(this,'equity')">📈 Equity Curve</button>
+          <button class="tab-btn active" onclick="switchHTab(this,'equity')">📈 Equity</button>
           <button class="tab-btn" onclick="switchHTab(this,'breakdown')">🥧 Breakdown</button>
           <button class="tab-btn" onclick="switchHTab(this,'calendar')">📅 Kalender</button>
-          <button class="tab-btn" onclick="switchHTab(this,'list')">📋 Daftar Lengkap</button>
+          <button class="tab-btn" onclick="switchHTab(this,'list')">📋 Daftar</button>
         </div>
-
-        <!-- EQUITY -->
         <div id="htab-equity">
           <div class="card" style="margin-bottom:12px">
             <div
@@ -1465,47 +1532,43 @@
           </div>
           <div class="grid2">
             <div class="card card-sm">
-              <div class="card-title">Best Streak (Win beruntun)</div>
+              <div class="card-title">Win Streak Terpanjang</div>
               <div class="card-val" id="h-wstreak" style="color:var(--green)">0</div>
             </div>
             <div class="card card-sm">
-              <div class="card-title">Worst Streak (Loss beruntun)</div>
+              <div class="card-title">Loss Streak Terpanjang</div>
               <div class="card-val" id="h-lstreak" style="color:var(--red)">0</div>
             </div>
           </div>
         </div>
-
-        <!-- BREAKDOWN -->
         <div id="htab-breakdown" style="display:none">
           <div class="grid2" style="margin-bottom:0">
             <div class="card" style="margin-bottom:12px">
               <div
                 style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">
-                Win / Loss / Break Even</div>
+                Win / Loss / BE</div>
               <canvas id="donutChart" style="display:block;width:100%;height:160px"></canvas>
             </div>
             <div class="card" style="margin-bottom:12px">
               <div
                 style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">
-                Performa per Setup</div>
+                Per Setup</div>
               <div id="h-setup-stats"></div>
             </div>
           </div>
           <div class="card" style="margin-bottom:12px">
             <div
               style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">
-              Performa per Pair</div>
+              Per Pair</div>
             <div id="h-pair-stats"></div>
           </div>
           <div class="card">
             <div
               style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">
-              Win/Loss per Hari dalam Seminggu</div>
+              Pip per Hari dalam Seminggu</div>
             <canvas id="dayChart" style="display:block;width:100%;height:100px"></canvas>
           </div>
         </div>
-
-        <!-- CALENDAR -->
         <div id="htab-calendar" style="display:none">
           <div class="card">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
@@ -1519,14 +1582,9 @@
                   style="width:10px;height:10px;background:rgba(76,175,118,.3);border-radius:2px;display:inline-block"></span>Profit</span>
               <span style="display:flex;align-items:center;gap:4px"><span
                   style="width:10px;height:10px;background:rgba(224,82,82,.3);border-radius:2px;display:inline-block"></span>Loss</span>
-              <span style="display:flex;align-items:center;gap:4px"><span
-                  style="width:10px;height:10px;background:rgba(255,255,255,.05);border-radius:2px;display:inline-block"></span>Tidak
-                Trading</span>
             </div>
           </div>
         </div>
-
-        <!-- LIST -->
         <div id="htab-list" style="display:none">
           <div class="card">
             <div style="overflow-x:auto">
@@ -1548,14 +1606,12 @@
             </div>
           </div>
         </div>
-
-        <!-- EMPTY -->
         <div id="h-empty" style="display:none">
           <div class="card" style="text-align:center;padding:48px 24px">
             <div style="font-size:48px;margin-bottom:12px">📒</div>
             <div style="font-size:16px;font-weight:600;margin-bottom:8px">Belum Ada Data Trade</div>
-            <div style="font-size:13px;color:var(--text2);margin-bottom:20px">Mulai catat trade di menu Jurnal Trade,
-              data akan otomatis tampil di sini.</div>
+            <div style="font-size:13px;color:var(--text2);margin-bottom:20px">Catat trade di Jurnal, data otomatis
+              tampil di sini.</div>
             <button class="btn btn-accent" onclick="go('jurnal')">Ke Jurnal Trade →</button>
           </div>
         </div>
@@ -1586,7 +1642,7 @@
             <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Sabar Adalah Keunggulan
             </div>
             <div style="font-size:13px;color:var(--text2);line-height:1.7">"The best trade is often no trade." Tunggu
-              setup A+, lewatkan setup jelek.</div>
+              setup A+.</div>
           </div>
           <div class="card">
             <div style="font-size:28px;margin-bottom:8px">🚫</div>
@@ -1599,14 +1655,14 @@
             <div style="font-size:28px;margin-bottom:8px">📒</div>
             <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Jurnal Setiap Trade</div>
             <div style="font-size:13px;color:var(--text2);line-height:1.7">Evaluasi mingguan wajib. Trader yang tidak
-              mencatat tidak bisa berkembang.</div>
+              mencatat tidak berkembang.</div>
           </div>
           <div class="card">
             <div style="font-size:28px;margin-bottom:8px">🎯</div>
             <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px">Konsistensi > Profit Besar
             </div>
-            <div style="font-size:13px;color:var(--text2);line-height:1.7">3–5% per bulan konsisten lebih baik dari 30%
-              lalu -20% bulan depan.</div>
+            <div style="font-size:13px;color:var(--text2);line-height:1.7">3–5% per bulan konsisten jauh lebih baik dari
+              hasil fluktuatif.</div>
           </div>
         </div>
       </div>
@@ -1614,6 +1670,7 @@
     </main>
   </div>
 
+  <!-- MOBILE BOTTOM NAV -->
   <div class="mobile-nav">
     <div class="mobile-nav-inner">
       <button class="mob-btn active" id="mn-dashboard" onclick="go('dashboard')"><span
@@ -1627,8 +1684,6 @@
 
   <!-- DRAWER OVERLAY -->
   <div class="mob-drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-
-  <!-- DRAWER -->
   <div class="mob-drawer" id="mobDrawer">
     <div class="mob-drawer-handle"></div>
     <div class="mob-drawer-title">Semua Menu</div>
@@ -1642,11 +1697,42 @@
         class="mob-drawer-icon">📖</span><span>Golden Rules</span></div>
   </div>
 
+  <!-- ===== FULLSCREEN CHART MODAL ===== -->
+  <div class="chart-modal" id="chartModal">
+    <div class="chart-modal-bar">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0">
+        <!-- Pair pills -->
+        <div style="display:flex;gap:4px;flex-wrap:wrap;">
+          <div class="modal-pill active" id="mp-EURUSD" onclick="setModalPair(this,'EURUSD','EUR/USD')">EUR/USD</div>
+          <div class="modal-pill" id="mp-GBPUSD" onclick="setModalPair(this,'GBPUSD','GBP/USD')">GBP/USD</div>
+          <div class="modal-pill" id="mp-USDJPY" onclick="setModalPair(this,'USDJPY','USD/JPY')">USD/JPY</div>
+          <div class="modal-pill" id="mp-XAUUSD" onclick="setModalPair(this,'XAUUSD','XAU/USD')">XAU/USD</div>
+          <div class="modal-pill" id="mp-GBPJPY" onclick="setModalPair(this,'GBPJPY','GBP/JPY')">GBP/JPY</div>
+          <div class="modal-pill" id="mp-AUDUSD" onclick="setModalPair(this,'AUDUSD','AUD/USD')">AUD/USD</div>
+        </div>
+        <!-- TF pills -->
+        <div style="display:flex;gap:4px;flex-wrap:wrap;">
+          <div class="modal-pill" id="mt-1" onclick="setModalTF(this,'1')">M1</div>
+          <div class="modal-pill" id="mt-5" onclick="setModalTF(this,'5')">M5</div>
+          <div class="modal-pill active" id="mt-15" onclick="setModalTF(this,'15')">M15</div>
+          <div class="modal-pill" id="mt-60" onclick="setModalTF(this,'60')">H1</div>
+          <div class="modal-pill" id="mt-240" onclick="setModalTF(this,'240')">H4</div>
+          <div class="modal-pill" id="mt-D" onclick="setModalTF(this,'D')">D1</div>
+        </div>
+      </div>
+      <button class="close-modal-btn" onclick="closeChartModal()">✕ Tutup</button>
+    </div>
+    <div id="tv-fullscreen-container">
+      <div id="tv-fullscreen-widget" style="height:100%;width:100%"></div>
+    </div>
+  </div>
+
   <script src="https://s3.tradingview.com/tv.js"></script>
   <script>
     // ====== STATE ======
     let tvWidget = null,
-      currentPair = 'EURUSD',
+      tvFsWidget = null;
+    let currentPair = 'EURUSD',
       currentTF = '15';
     let calYear = new Date().getFullYear(),
       calMonth = new Date().getMonth();
@@ -1662,28 +1748,41 @@
       } catch (e) {}
     }
 
+    const TV_TF = {
+      '1': '1',
+      '5': '5',
+      '15': '15',
+      '60': '60',
+      '240': '240',
+      'D': '1D'
+    };
+    const PAIR_LABEL = {
+      EURUSD: 'EUR/USD',
+      GBPUSD: 'GBP/USD',
+      USDJPY: 'USD/JPY',
+      XAUUSD: 'XAU/USD',
+      GBPJPY: 'GBP/JPY',
+      AUDUSD: 'AUD/USD',
+      USDCHF: 'USD/CHF',
+      USDCAD: 'USD/CAD'
+    };
+
     // ====== NAV ======
     const ALL_PANELS = ['dashboard', 'setup', 'sesi', 'risk', 'checklist', 'jurnal', 'historis', 'rules'];
-    // pages accessible directly from bottom nav
-    const MAIN_MOB = ['dashboard', 'setup', 'jurnal', 'historis'];
-    // pages inside drawer
-    const DRAWER_MOB = ['sesi', 'risk', 'checklist', 'rules'];
+    const DRAWER_PAGES = ['sesi', 'risk', 'checklist', 'rules'];
+    const MAIN_MOB_PAGES = ['dashboard', 'setup', 'jurnal', 'historis'];
 
     function go(name) {
       ALL_PANELS.forEach(p => document.getElementById('panel-' + p).classList.toggle('active', p === name));
-      // sidebar
-      const navItems = document.querySelectorAll('.nav-item');
       const order = ['dashboard', 'setup', 'sesi', 'risk', 'checklist', 'jurnal', 'historis', 'rules'];
-      navItems.forEach((el, i) => el.classList.toggle('active', order[i] === name));
-      // bottom nav buttons
-      MAIN_MOB.forEach(id => {
+      document.querySelectorAll('.nav-item').forEach((el, i) => el.classList.toggle('active', order[i] === name));
+      MAIN_MOB_PAGES.forEach(id => {
         const el = document.getElementById('mn-' + id);
         if (el) el.classList.toggle('active', id === name);
       });
       const moreBtn = document.getElementById('mn-more');
-      if (moreBtn) moreBtn.classList.toggle('active', DRAWER_MOB.includes(name));
-      // drawer items
-      DRAWER_MOB.forEach(id => {
+      if (moreBtn) moreBtn.classList.toggle('active', DRAWER_PAGES.includes(name));
+      DRAWER_PAGES.forEach(id => {
         const el = document.getElementById('md-' + id);
         if (el) el.classList.toggle('active', id === name);
       });
@@ -1775,7 +1874,7 @@
         name: 'Sepi',
         vol: 'Sangat Rendah',
         color: 'var(--text3)',
-        tip: 'Tidak ada sesi aktif, spread sangat lebar'
+        tip: 'Tidak ada sesi aktif'
       };
       document.getElementById('d-sess').textContent = m.name;
       document.getElementById('d-sess').style.color = m.color;
@@ -1793,7 +1892,6 @@
       }).join('');
       document.getElementById('d-rec').innerHTML =
         `<strong style="color:${m.color}">${m.name}</strong> — ${m.vol}<br>${m.tip}`;
-      const wins = trades.filter(t => t.result === 'win').length;
       const totalPip = trades.reduce((a, t) => a + t.pips, 0);
       document.getElementById('d-trades').textContent = trades.length;
       document.getElementById('d-pips').textContent = (totalPip >= 0 ? '+' : '') + totalPip.toFixed(1);
@@ -1814,39 +1912,41 @@
       document.getElementById('sess-list').innerHTML = SESS.map(s => {
         const on = s.end > s.start ? (h >= s.start && h < s.end) : (h >= s.start || h < s.end);
         const dur = s.end > s.start ? s.end - s.start : 24 - s.start + s.end;
-        return `<div class="sess-row">
-      <span class="sess-name" style="color:${s.color};font-weight:${on?600:400}">${s.name}</span>
-      <div class="sess-bar-wrap"><div class="sess-bar-fill" style="width:${Math.round(dur/12*100)}%;background:${s.color};opacity:${on?1:.25}"></div></div>
-      <span class="sess-time">${String(s.start).padStart(2,'0')}:00–${String(s.end).padStart(2,'0')}:00 WIB</span>
-      ${on?`<span class="badge badge-green" style="font-size:10px">AKTIF</span>`:''}
-    </div>`;
+        return `<div class="sess-row"><span class="sess-name" style="color:${s.color};font-weight:${on?600:400}">${s.name}</span><div class="sess-bar-wrap"><div class="sess-bar-fill" style="width:${Math.round(dur/12*100)}%;background:${s.color};opacity:${on?1:.25}"></div></div><span class="sess-time">${String(s.start).padStart(2,'0')}:00–${String(s.end).padStart(2,'0')}:00 WIB</span>${on?`<span class="badge badge-green" style="font-size:10px">AKTIF</span>`:''}</div>`;
       }).join('');
-      document.getElementById('sess-tips').innerHTML = SESS.map(s => `<div class="card" style="margin-bottom:8px;border-left:2px solid ${s.color}">
-    <div style="font-size:13px;font-weight:600;color:${s.color};margin-bottom:3px">${s.name}</div>
-    <div style="font-size:12px;color:var(--text2);margin-bottom:2px">${s.tip}</div>
-    <div style="font-size:11px;color:var(--text3)">Setup terbaik: ${s.setup}</div>
-  </div>`).join('');
+      document.getElementById('sess-tips').innerHTML = SESS.map(s =>
+        `<div class="card" style="margin-bottom:8px;border-left:2px solid ${s.color}"><div style="font-size:13px;font-weight:600;color:${s.color};margin-bottom:3px">${s.name}</div><div style="font-size:12px;color:var(--text2);margin-bottom:2px">${s.tip}</div><div style="font-size:11px;color:var(--text3)">Setup: ${s.setup}</div></div>`
+      ).join('');
     }
 
-    // ====== TRADINGVIEW CHART ======
-    const TV_TF_MAP = {
-      '1': '1',
-      '5': '5',
-      '15': '15',
-      '60': '60',
-      '240': '240',
-      'D': '1D'
-    };
-    const PAIR_LABEL = {
-      EURUSD: 'EUR/USD',
-      GBPUSD: 'GBP/USD',
-      USDJPY: 'USD/JPY',
-      XAUUSD: 'XAU/USD',
-      GBPJPY: 'GBP/JPY',
-      AUDUSD: 'AUD/USD',
-      USDCHF: 'USD/CHF',
-      USDCAD: 'USD/CAD'
-    };
+    // ====== TRADINGVIEW ======
+    function buildTVConfig(containerId, sym, tf) {
+      return {
+        container_id: containerId,
+        symbol: sym,
+        interval: TV_TF[tf] || '15',
+        timezone: 'Asia/Jakarta',
+        theme: 'dark',
+        style: '1',
+        locale: 'id',
+        enable_publishing: false,
+        hide_side_toolbar: false,
+        allow_symbol_change: true,
+        withdateranges: true,
+        save_image: false,
+        height: '100%',
+        width: '100%',
+        loading_screen: {
+          backgroundColor: '#0f0f0f',
+          foregroundColor: '#d4a853'
+        },
+        overrides: {
+          'paneProperties.background': '#0f0f0f',
+          'paneProperties.backgroundType': 'solid',
+          'scalesProperties.textColor': '#9c9890'
+        },
+      };
+    }
 
     function initTV() {
       const el = document.getElementById('tv-widget');
@@ -1858,43 +1958,13 @@
         tvWidget = null;
       }
       if (typeof TradingView === 'undefined') {
-        el.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--text3)">
-      <div style="font-size:32px">🌐</div>
-      <div style="font-size:13px;text-align:center">Butuh koneksi internet untuk chart real-time</div>
-      <a href="https://www.tradingview.com/chart/?symbol=${currentPair}" target="_blank" style="color:var(--accent);font-size:13px;text-decoration:none">Buka di TradingView.com →</a>
-    </div>`;
+        el.innerHTML =
+          `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;color:var(--text3)"><div style="font-size:32px">🌐</div><div style="font-size:13px">Butuh koneksi internet</div><a href="https://www.tradingview.com/chart/?symbol=${currentPair}" target="_blank" style="color:var(--accent);font-size:13px">Buka TradingView →</a></div>`;
         return;
       }
       try {
-        tvWidget = new TradingView.widget({
-          container_id: 'tv-widget',
-          symbol: currentPair,
-          interval: TV_TF_MAP[currentTF] || '15',
-          timezone: 'Asia/Jakarta',
-          theme: 'dark',
-          style: '1',
-          locale: 'id',
-          enable_publishing: false,
-          hide_side_toolbar: false,
-          allow_symbol_change: true,
-          withdateranges: true,
-          save_image: false,
-          height: '100%',
-          width: '100%',
-          loading_screen: {
-            backgroundColor: '#0f0f0f',
-            foregroundColor: '#d4a853'
-          },
-          overrides: {
-            'paneProperties.background': '#0f0f0f',
-            'paneProperties.backgroundType': 'solid',
-            'scalesProperties.textColor': '#9c9890',
-          },
-        });
-      } catch (e) {
-        el.innerHTML =
-          `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3);font-size:13px">Chart tidak dapat dimuat. <a href="https://www.tradingview.com/chart/?symbol=${currentPair}" target="_blank" style="color:var(--accent);margin-left:6px">Buka di TradingView →</a></div>`;
-      }
+        tvWidget = new TradingView.widget(buildTVConfig('tv-widget', currentPair, currentTF));
+      } catch (e) {}
     }
 
     function setPair(el, sym, label) {
@@ -1917,7 +1987,7 @@
       currentTF = tf;
       if (tvWidget && tvWidget.chart) {
         try {
-          tvWidget.chart().setResolution(TV_TF_MAP[tf] || '15');
+          tvWidget.chart().setResolution(TV_TF[tf] || '15');
           return;
         } catch (e) {}
       }
@@ -1927,6 +1997,88 @@
     function toggleSetup(el) {
       document.querySelectorAll('.setup-card').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
+    }
+
+    // ====== FULLSCREEN CHART MODAL ======
+    function openChartModal() {
+      const modal = document.getElementById('chartModal');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // build fullscreen chart
+      const el = document.getElementById('tv-fullscreen-widget');
+      el.innerHTML = '';
+      if (tvFsWidget) {
+        try {
+          tvFsWidget.remove();
+        } catch (e) {}
+        tvFsWidget = null;
+      }
+      if (typeof TradingView === 'undefined') {
+        el.innerHTML =
+          `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3);font-size:13px">Tidak ada koneksi internet</div>`;
+        return;
+      }
+      try {
+        tvFsWidget = new TradingView.widget(buildTVConfig('tv-fullscreen-widget', currentPair, currentTF));
+      } catch (e) {}
+      // sync modal pills
+      document.querySelectorAll('[id^="mp-"]').forEach(p => p.classList.toggle('active', p.id === 'mp-' + currentPair));
+      document.querySelectorAll('[id^="mt-"]').forEach(p => p.classList.toggle('active', p.id === 'mt-' + currentTF));
+    }
+
+    function closeChartModal() {
+      document.getElementById('chartModal').classList.remove('open');
+      document.body.style.overflow = '';
+      if (tvFsWidget) {
+        try {
+          tvFsWidget.remove();
+        } catch (e) {}
+        tvFsWidget = null;
+      }
+    }
+
+    function setModalPair(el, sym, label) {
+      document.querySelectorAll('[id^="mp-"]').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      currentPair = sym;
+      document.getElementById('chart-pair-label').textContent = label;
+      // also update desktop pills
+      document.querySelectorAll('.pair-pill').forEach((p, i) => p.classList.toggle('active', p.textContent.replace(
+        /\s/g, '') === (PAIR_LABEL[sym] || sym).replace(/\s/g, '')));
+      if (tvFsWidget && tvFsWidget.chart) {
+        try {
+          tvFsWidget.chart().setSymbol(sym);
+          return;
+        } catch (e) {}
+      }
+      if (tvWidget && tvWidget.chart) {
+        try {
+          tvWidget.chart().setSymbol(sym);
+        } catch (e) {}
+      }
+    }
+
+    function setModalTF(el, tf) {
+      document.querySelectorAll('[id^="mt-"]').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      currentTF = tf;
+      document.querySelectorAll('.tf-pill').forEach(p => {
+        const map = {
+          '1': 'M1',
+          '5': 'M5',
+          '15': 'M15',
+          '60': 'H1',
+          '240': 'H4',
+          'D': 'D1'
+        };
+        p.classList.toggle('active', p.textContent === map[tf]);
+      });
+      if (tvFsWidget && tvFsWidget.chart) {
+        try {
+          tvFsWidget.chart().setResolution(TV_TF[tf] || '15');
+          return;
+        } catch (e) {}
+      }
     }
 
     // ====== RISK ======
@@ -1948,7 +2100,7 @@
     // ====== CHECKLIST ======
     const CL_DATA = {
       'cl-pre': ['Cek kalender ekonomi — ada news besar?', 'Cek spread broker (< 3 pip)', 'Tentukan bias harian',
-        'Review jurnal trade kemarin'
+        'Review jurnal kemarin'
       ],
       'cl-analysis': ['Tandai level SR di H1/H4', 'Posisi harga vs EMA 20 & 50', 'Konfirmasi sesi aktif',
         'Hitung ATR untuk SL/TP', 'Identifikasi setup terbaik'
@@ -2003,15 +2155,15 @@
     }
 
     function addTrade() {
-      const pair = document.getElementById('j-pair').value;
-      const setup = document.getElementById('j-setup').value;
-      const dir = document.getElementById('j-dir').value;
-      const result = document.getElementById('j-result').value;
-      const pips = parseFloat(document.getElementById('j-pips').value);
-      const date = document.getElementById('j-date').value;
-      const note = document.getElementById('j-note').value.trim();
-      const pipEl = document.getElementById('j-pips');
-      const dateEl = document.getElementById('j-date');
+      const pair = document.getElementById('j-pair').value,
+        setup = document.getElementById('j-setup').value,
+        dir = document.getElementById('j-dir').value;
+      const result = document.getElementById('j-result').value,
+        pips = parseFloat(document.getElementById('j-pips').value);
+      const date = document.getElementById('j-date').value,
+        note = document.getElementById('j-note').value.trim();
+      const pipEl = document.getElementById('j-pips'),
+        dateEl = document.getElementById('j-date');
       if (isNaN(pips)) {
         pipEl.style.borderColor = 'var(--red)';
         setTimeout(() => pipEl.style.borderColor = '', 1500);
@@ -2048,10 +2200,10 @@
     function renderJournal() {
       const filter = document.getElementById('j-filter').value;
       const filtered = filter === 'all' ? trades : trades.filter(t => t.result === filter);
-      const wins = trades.filter(t => t.result === 'win').length;
-      const losses = trades.filter(t => t.result === 'loss').length;
-      const totalPip = trades.reduce((a, t) => a + t.pips, 0);
-      const wr = trades.length ? Math.round(wins / trades.length * 100) + '%' : '—';
+      const wins = trades.filter(t => t.result === 'win').length,
+        losses = trades.filter(t => t.result === 'loss').length;
+      const totalPip = trades.reduce((a, t) => a + t.pips, 0),
+        wr = trades.length ? Math.round(wins / trades.length * 100) + '%' : '—';
       document.getElementById('j-wr').textContent = wr;
       document.getElementById('j-wr').style.color = trades.length ? (wins / trades.length >= .5 ? 'var(--green)' :
         'var(--red)') : 'var(--text)';
@@ -2063,24 +2215,14 @@
       const tbody = document.getElementById('j-body');
       if (!filtered.length) {
         tbody.innerHTML =
-          `<tr><td colspan="9" style="color:var(--text3);padding:20px;text-align:center">${trades.length?'Tidak ada trade sesuai filter.':'Belum ada trade. Mulai catat trade pertamamu.'}</td></tr>`;
+          `<tr><td colspan="9" style="color:var(--text3);padding:20px;text-align:center">${trades.length?'Tidak ada sesuai filter.':'Belum ada trade.'}</td></tr>`;
         return;
       }
       tbody.innerHTML = filtered.map(t => {
         const ri = trades.indexOf(t);
         const rb = t.result === 'win' ? `<span class="badge badge-green">✅ Win</span>` : t.result === 'loss' ?
           `<span class="badge badge-red">❌ Loss</span>` : `<span class="badge badge-gray">➖ BE</span>`;
-        return `<tr>
-      <td style="color:var(--text3)">${trades.length-ri}</td>
-      <td style="color:var(--text3);font-size:12px">${t.date||'—'}</td>
-      <td style="font-weight:500">${t.pair}</td>
-      <td style="color:var(--text2);font-size:12px">${t.setup}</td>
-      <td><span class="badge ${t.dir==='BUY'?'badge-green':'badge-red'}">${t.dir}</span></td>
-      <td>${rb}</td>
-      <td style="color:${t.pips>=0?'var(--green)':'var(--red)'};font-weight:600">${t.pips>=0?'+':''}${t.pips}</td>
-      <td style="color:var(--text3);font-size:12px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.note||''}">${t.note||'—'}</td>
-      <td><button onclick="removeTrade(${ri})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:2px 4px">✕</button></td>
-    </tr>`;
+        return `<tr><td style="color:var(--text3)">${trades.length-ri}</td><td style="color:var(--text3);font-size:12px">${t.date||'—'}</td><td style="font-weight:500">${t.pair}</td><td style="color:var(--text2);font-size:12px">${t.setup}</td><td><span class="badge ${t.dir==='BUY'?'badge-green':'badge-red'}">${t.dir}</span></td><td>${rb}</td><td style="color:${t.pips>=0?'var(--green)':'var(--red)'};font-weight:600">${t.pips>=0?'+':''}${t.pips}</td><td style="color:var(--text3);font-size:12px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.note||''}">${t.note||'—'}</td><td><button onclick="removeTrade(${ri})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px">✕</button></td></tr>`;
       }).join('');
     }
 
@@ -2098,9 +2240,9 @@
 
     function getHFiltered() {
       let data = [...trades];
-      const pair = document.getElementById('h-pair').value;
-      const setup = document.getElementById('h-setup').value;
-      const period = document.getElementById('h-period').value;
+      const pair = document.getElementById('h-pair').value,
+        setup = document.getElementById('h-setup').value,
+        period = document.getElementById('h-period').value;
       if (pair !== 'all') data = data.filter(t => t.pair === pair);
       if (setup !== 'all') data = data.filter(t => t.setup === setup);
       if (period !== 'all') {
@@ -2120,25 +2262,23 @@
     function renderHistoris() {
       const data = getHFiltered();
       const empty = document.getElementById('h-empty');
-      const tabs = ['equity', 'breakdown', 'calendar', 'list'];
       if (trades.length === 0) {
         empty.style.display = 'block';
-        tabs.forEach(t => {
+        ['equity', 'breakdown', 'calendar', 'list'].forEach(t => {
           const el = document.getElementById('htab-' + t);
           if (el) el.style.display = 'none';
         });
         document.querySelectorAll('.tab-btn').forEach(b => b.style.display = 'none');
-        document.getElementById('h-total').textContent = '0';
-        document.getElementById('h-wr').textContent = '—';
-        document.getElementById('h-pip').textContent = '0';
-        document.getElementById('h-avg').textContent = '—';
+        ['h-total', 'h-wr', 'h-pip', 'h-avg'].forEach(id => {
+          document.getElementById(id).textContent = id === 'h-total' ? '0' : '—';
+        });
         return;
       }
       empty.style.display = 'none';
       document.querySelectorAll('.tab-btn').forEach(b => b.style.display = '');
-      const wins = data.filter(t => t.result === 'win').length;
-      const totalPip = data.reduce((a, t) => a + t.pips, 0);
-      const avg = data.length ? totalPip / data.length : 0;
+      const wins = data.filter(t => t.result === 'win').length,
+        totalPip = data.reduce((a, t) => a + t.pips, 0),
+        avg = data.length ? totalPip / data.length : 0;
       document.getElementById('h-total').textContent = data.length;
       document.getElementById('h-wr').textContent = data.length ? Math.round(wins / data.length * 100) + '%' : '—';
       document.getElementById('h-wr').style.color = data.length ? (wins / data.length >= .5 ? 'var(--green)' :
@@ -2162,10 +2302,10 @@
       const sorted = [...data].sort((a, b) => (a.date || '').localeCompare(b.date || '') || (a.ts || 0) - (b.ts || 0));
       const canvas = document.getElementById('equityChart');
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.parentElement.offsetWidth;
-      const H = 160;
-      const dpr = window.devicePixelRatio || 1;
+      const ctx = canvas.getContext('2d'),
+        W = canvas.parentElement.offsetWidth,
+        H = 160,
+        dpr = window.devicePixelRatio || 1;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       canvas.style.width = W + 'px';
@@ -2178,19 +2318,18 @@
         ctx.fillText('Tidak ada data', W / 2 - 50, H / 2);
         return;
       }
-      const cumPips = [0];
+      const cp = [0];
       let cum = 0;
       sorted.forEach(t => {
         cum += t.pips;
-        cumPips.push(cum);
+        cp.push(cum);
       });
-      const minP = Math.min(...cumPips),
-        maxP = Math.max(...cumPips);
-      const range = maxP - minP || 1;
-      const pad = 12;
-      const scX = i => (i / (cumPips.length - 1)) * (W - pad * 2) + pad;
-      const scY = v => H - pad - ((v - minP) / range) * (H - pad * 2);
-      // Grid
+      const minP = Math.min(...cp),
+        maxP = Math.max(...cp),
+        range = maxP - minP || 1,
+        pad = 14;
+      const scX = i => (i / (cp.length - 1)) * (W - pad * 2) + pad,
+        scY = v => H - pad - ((v - minP) / range) * (H - pad * 2);
       ctx.strokeStyle = 'rgba(255,255,255,0.04)';
       ctx.lineWidth = 0.5;
       for (let i = 0; i < 4; i++) {
@@ -2200,7 +2339,6 @@
         ctx.lineTo(W, y);
         ctx.stroke();
       }
-      // Zero line
       const zy = scY(0);
       ctx.strokeStyle = 'rgba(255,255,255,0.08)';
       ctx.lineWidth = 0.5;
@@ -2210,101 +2348,89 @@
       ctx.lineTo(W, zy);
       ctx.stroke();
       ctx.setLineDash([]);
-      // Gradient fill
-      const final = cumPips[cumPips.length - 1];
+      const fin = cp[cp.length - 1];
       const grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, final >= 0 ? 'rgba(76,175,118,.3)' : 'rgba(224,82,82,.3)');
+      grad.addColorStop(0, fin >= 0 ? 'rgba(76,175,118,.3)' : 'rgba(224,82,82,.3)');
       grad.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.beginPath();
-      cumPips.forEach((v, i) => i ? ctx.lineTo(scX(i), scY(v)) : ctx.moveTo(scX(i), scY(v)));
-      ctx.lineTo(scX(cumPips.length - 1), H);
+      cp.forEach((v, i) => i ? ctx.lineTo(scX(i), scY(v)) : ctx.moveTo(scX(i), scY(v)));
+      ctx.lineTo(scX(cp.length - 1), H);
       ctx.lineTo(scX(0), H);
       ctx.closePath();
       ctx.fillStyle = grad;
       ctx.fill();
-      // Line
-      ctx.strokeStyle = final >= 0 ? '#4caf76' : '#e05252';
+      ctx.strokeStyle = fin >= 0 ? '#4caf76' : '#e05252';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      cumPips.forEach((v, i) => i ? ctx.lineTo(scX(i), scY(v)) : ctx.moveTo(scX(i), scY(v)));
+      cp.forEach((v, i) => i ? ctx.lineTo(scX(i), scY(v)) : ctx.moveTo(scX(i), scY(v)));
       ctx.stroke();
-      // Endpoint dot
-      const lx = scX(cumPips.length - 1),
-        ly = scY(final);
+      const lx = scX(cp.length - 1),
+        ly = scY(fin);
       ctx.beginPath();
       ctx.arc(lx, ly, 4, 0, Math.PI * 2);
-      ctx.fillStyle = final >= 0 ? '#4caf76' : '#e05252';
+      ctx.fillStyle = fin >= 0 ? '#4caf76' : '#e05252';
       ctx.fill();
-      // Label
-      ctx.fillStyle = final >= 0 ? '#4caf76' : '#e05252';
+      ctx.fillStyle = fin >= 0 ? '#4caf76' : '#e05252';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText((final >= 0 ? '+' : '') + final.toFixed(1) + 'p', lx + 6, ly + 4);
-      // Best/Worst/Streaks
-      const sortedWins = [...sorted].filter(t => t.pips > 0).sort((a, b) => b.pips - a.pips);
-      const sortedLoss = [...sorted].filter(t => t.pips < 0).sort((a, b) => a.pips - b.pips);
-      document.getElementById('h-best').textContent = sortedWins.length ? '+' + sortedWins[0].pips + 'p' : '—';
-      document.getElementById('h-best-sub').textContent = sortedWins.length ?
-        `${sortedWins[0].pair} · ${sortedWins[0].date||''}` : '—';
-      document.getElementById('h-worst').textContent = sortedLoss.length ? sortedLoss[0].pips + 'p' : '—';
-      document.getElementById('h-worst-sub').textContent = sortedLoss.length ?
-        `${sortedLoss[0].pair} · ${sortedLoss[0].date||''}` : '—';
-      // Streaks
-      let maxWS = 0,
-        maxLS = 0,
-        ws = 0,
-        ls = 0;
+      ctx.fillText((fin >= 0 ? '+' : '') + fin.toFixed(1) + 'p', lx + 6, ly + 4);
+      const sw = [...sorted].filter(t => t.pips > 0).sort((a, b) => b.pips - a.pips),
+        sl = [...sorted].filter(t => t.pips < 0).sort((a, b) => a.pips - b.pips);
+      document.getElementById('h-best').textContent = sw.length ? '+' + sw[0].pips + 'p' : '—';
+      document.getElementById('h-best-sub').textContent = sw.length ? `${sw[0].pair} · ${sw[0].date||''}` : '—';
+      document.getElementById('h-worst').textContent = sl.length ? sl[0].pips + 'p' : '—';
+      document.getElementById('h-worst-sub').textContent = sl.length ? `${sl[0].pair} · ${sl[0].date||''}` : '—';
+      let mw = 0,
+        ml = 0,
+        w = 0,
+        l = 0;
       sorted.forEach(t => {
         if (t.result === 'win') {
-          ws++;
-          ls = 0;
+          w++;
+          l = 0;
         } else if (t.result === 'loss') {
-          ls++;
-          ws = 0;
+          l++;
+          w = 0;
         } else {
-          ws = 0;
-          ls = 0;
+          w = 0;
+          l = 0;
         }
-        if (ws > maxWS) maxWS = ws;
-        if (ls > maxLS) maxLS = ls;
+        if (w > mw) mw = w;
+        if (l > ml) ml = l;
       });
-      document.getElementById('h-wstreak').textContent = maxWS;
-      document.getElementById('h-lstreak').textContent = maxLS;
+      document.getElementById('h-wstreak').textContent = mw;
+      document.getElementById('h-lstreak').textContent = ml;
     }
 
     function drawBreakdown(data) {
-      // Donut
       const canvas = document.getElementById('donutChart');
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.parentElement.offsetWidth,
-        H = 160;
-      const dpr = window.devicePixelRatio || 1;
+      const ctx = canvas.getContext('2d'),
+        W = canvas.parentElement.offsetWidth,
+        H = 160,
+        dpr = window.devicePixelRatio || 1;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       canvas.style.width = W + 'px';
       canvas.style.height = H + 'px';
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, W, H);
-      const wins = data.filter(t => t.result === 'win').length;
-      const losses = data.filter(t => t.result === 'loss').length;
-      const bes = data.filter(t => t.result === 'be').length;
-      const total = data.length || 1;
+      const wins = data.filter(t => t.result === 'win').length,
+        losses = data.filter(t => t.result === 'loss').length,
+        bes = data.filter(t => t.result === 'be').length,
+        total = data.length || 1;
       const cx = W / 2,
         cy = H / 2,
         r = Math.min(cx, cy) - 16,
         ir = r * .55;
       const slices = [{
         v: wins,
-        c: '#4caf76',
-        l: 'Win'
+        c: '#4caf76'
       }, {
         v: losses,
-        c: '#e05252',
-        l: 'Loss'
+        c: '#e05252'
       }, {
         v: bes,
-        c: '#5a5854',
-        l: 'BE'
+        c: '#5a5854'
       }].filter(s => s.v > 0);
       if (!data.length) {
         ctx.fillStyle = '#5a5854';
@@ -2341,94 +2467,74 @@
       ctx.font = '10px sans-serif';
       ctx.fillText('Win Rate', cx, cy + 18);
       ctx.textAlign = 'left';
-
-      // Setup stats
       const setups = ['Breakout', 'EMA Pullback', 'SR Flip', 'Lainnya'];
       document.getElementById('h-setup-stats').innerHTML = setups.map(s => {
           const sd = data.filter(t => t.setup === s);
           if (!sd.length) return '';
-          const sw = sd.filter(t => t.result === 'win').length;
-          const sp = sd.reduce((a, t) => a + t.pips, 0);
-          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
-      <div><div style="font-size:13px;font-weight:500">${s}</div><div style="font-size:11px;color:var(--text3)">${sd.length} trade · WR ${Math.round(sw/sd.length*100)}%</div></div>
-      <div style="font-size:14px;font-weight:600;color:${sp>=0?'var(--green)':'var(--red)'}">${sp>=0?'+':''}${sp.toFixed(0)}p</div>
-    </div>`;
+          const sw = sd.filter(t => t.result === 'win').length,
+            sp = sd.reduce((a, t) => a + t.pips, 0);
+          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:13px;font-weight:500">${s}</div><div style="font-size:11px;color:var(--text3)">${sd.length} trade · WR ${Math.round(sw/sd.length*100)}%</div></div><div style="font-size:14px;font-weight:600;color:${sp>=0?'var(--green)':'var(--red)'}">${sp>=0?'+':''}${sp.toFixed(0)}p</div></div>`;
         }).filter(Boolean).join('') ||
         '<div style="color:var(--text3);padding:10px 0;font-size:13px">Tidak ada data</div>';
-
-      // Pair stats
       const pairs = [...new Set(data.map(t => t.pair))];
-      document.getElementById('h-pair-stats').innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px">${
-    pairs.map(p=>{
-      const pd=data.filter(t=>t.pair===p);
-      const pw=pd.filter(t=>t.result==='win').length;
-      const pp=pd.reduce((a,t)=>a+t.pips,0);
-      return `<div style="background:var(--bg4);border-radius:var(--radius);padding:10px 12px">
-        <div style="font-size:13px;font-weight:600">${p}</div>
-        <div style="font-size:11px;color:var(--text3)">${pd.length} trade · WR ${Math.round(pw/pd.length*100)}%</div>
-        <div style="font-size:16px;font-weight:600;margin-top:4px;color:${pp>=0?'var(--green)':'var(--red)'}">${pp>=0?'+':''}${pp.toFixed(0)}p</div>
-      </div>`;
-    }).join('')
-  }</div>`;
-
-      // Day of week chart
-      const dayCanvas = document.getElementById('dayChart');
-      if (dayCanvas) {
-        const dctx = dayCanvas.getContext('2d');
-        const DW = dayCanvas.parentElement.offsetWidth,
-          DH = 100;
-        dayCanvas.width = DW * dpr;
-        dayCanvas.height = DH * dpr;
-        dayCanvas.style.width = DW + 'px';
-        dayCanvas.style.height = DH + 'px';
-        dctx.scale(dpr, dpr);
-        dctx.clearRect(0, 0, DW, DH);
-        const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
-        const dayPip = Array(7).fill(0),
-          dayCount = Array(7).fill(0);
-        data.forEach(t => {
-          if (t.date) {
-            const d = new Date(t.date).getDay();
-            dayPip[d] += t.pips;
-            dayCount[d]++;
-          }
-        });
-        const maxAbs = Math.max(...dayPip.map(Math.abs), 1);
-        const bw = (DW - 40) / 7 - 4;
-        days.forEach((d, i) => {
-          const x = 20 + (i * (DW - 40) / 7);
-          const pip = dayPip[i];
-          const pct = pip / maxAbs;
-          const barH = Math.abs(pct) * ((DH - 30) / 2);
-          const midY = (DH - 15) / 2;
-          dctx.fillStyle = pip >= 0 ? 'rgba(76,175,118,.6)' : 'rgba(224,82,82,.6)';
-          if (pip >= 0) dctx.fillRect(x, midY - barH, bw, barH);
-          else dctx.fillRect(x, midY, bw, barH);
-          dctx.fillStyle = '#9c9890';
-          dctx.font = '10px sans-serif';
-          dctx.textAlign = 'center';
-          dctx.fillText(d, x + bw / 2, DH - 4);
-          if (dayCount[i] > 0) {
-            dctx.fillStyle = pip >= 0 ? '#4caf76' : '#e05252';
-            dctx.font = 'bold 9px sans-serif';
-            dctx.fillText((pip >= 0 ? '+' : '') + pip.toFixed(0), x + bw / 2, pip >= 0 ? midY - barH - 3 : midY +
-              barH + 10);
-          }
-        });
-        dctx.strokeStyle = 'rgba(255,255,255,0.08)';
-        dctx.lineWidth = 0.5;
-        dctx.beginPath();
-        dctx.moveTo(0, (DH - 15) / 2);
-        dctx.lineTo(DW, (DH - 15) / 2);
-        dctx.stroke();
-      }
+      document.getElementById('h-pair-stats').innerHTML =
+        `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px">${pairs.map(p=>{const pd=data.filter(t=>t.pair===p),pw=pd.filter(t=>t.result==='win').length,pp=pd.reduce((a,t)=>a+t.pips,0);return `<div style="background:var(--bg4);border-radius:var(--radius);padding:10px 12px"><div style="font-size:13px;font-weight:600">${p}</div><div style="font-size:11px;color:var(--text3)">${pd.length} trade · WR ${Math.round(pw/pd.length*100)}%</div><div style="font-size:16px;font-weight:600;margin-top:4px;color:${pp>=0?'var(--green)':'var(--red)'}">${pp>=0?'+':''}${pp.toFixed(0)}p</div></div>`;}).join('')}</div>`;
+      const dc = document.getElementById('dayChart');
+      if (!dc) return;
+      const dctx = dc.getContext('2d'),
+        DW = dc.parentElement.offsetWidth,
+        DH = 100;
+      dc.width = DW * dpr;
+      dc.height = DH * dpr;
+      dc.style.width = DW + 'px';
+      dc.style.height = DH + 'px';
+      dctx.scale(dpr, dpr);
+      dctx.clearRect(0, 0, DW, DH);
+      const DAYS = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+        dp = Array(7).fill(0),
+        dc2 = Array(7).fill(0);
+      data.forEach(t => {
+        if (t.date) {
+          const d = new Date(t.date).getDay();
+          dp[d] += t.pips;
+          dc2[d]++;
+        }
+      });
+      const maxA = Math.max(...dp.map(Math.abs), 1),
+        bw = (DW - 40) / 7 - 4;
+      DAYS.forEach((d, i) => {
+        const x = 20 + (i * (DW - 40) / 7),
+          pip = dp[i],
+          pct = pip / maxA,
+          bh = Math.abs(pct) * ((DH - 30) / 2),
+          midY = (DH - 15) / 2;
+        dctx.fillStyle = pip >= 0 ? 'rgba(76,175,118,.6)' : 'rgba(224,82,82,.6)';
+        if (pip >= 0) dctx.fillRect(x, midY - bh, bw, bh);
+        else dctx.fillRect(x, midY, bw, bh);
+        dctx.fillStyle = '#9c9890';
+        dctx.font = '10px sans-serif';
+        dctx.textAlign = 'center';
+        dctx.fillText(d, x + bw / 2, DH - 4);
+        if (dc2[i] > 0) {
+          dctx.fillStyle = pip >= 0 ? '#4caf76' : '#e05252';
+          dctx.font = 'bold 9px sans-serif';
+          dctx.fillText((pip >= 0 ? '+' : '') + pip.toFixed(0), x + bw / 2, pip >= 0 ? midY - bh - 3 : midY + bh +
+            10);
+        }
+      });
+      dctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      dctx.lineWidth = 0.5;
+      dctx.beginPath();
+      dctx.moveTo(0, (DH - 15) / 2);
+      dctx.lineTo(DW, (DH - 15) / 2);
+      dctx.stroke();
     }
 
     function drawCalendar(data) {
       const MONTHS = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
-        'November', 'Desember'
-      ];
-      const DAYS = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+          'November', 'Desember'
+        ],
+        DAYS = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
       document.getElementById('cal-title').textContent = `${MONTHS[calMonth]} ${calYear}`;
       const tdMap = {};
       (data || getHFiltered()).forEach(t => {
@@ -2444,16 +2550,16 @@
           tdMap[k].count++;
         }
       });
-      const firstDay = new Date(calYear, calMonth, 1).getDay();
-      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-      const today = new Date();
+      const firstDay = new Date(calYear, calMonth, 1).getDay(),
+        daysInMonth = new Date(calYear, calMonth + 1, 0).getDate(),
+        today = new Date();
       let html = DAYS.map(d =>
           `<div style="font-size:10px;color:var(--text3);padding:5px 2px;text-align:center;font-weight:600">${d}</div>`)
         .join('');
       for (let i = 0; i < firstDay; i++) html += `<div></div>`;
       for (let d = 1; d <= daysInMonth; d++) {
-        const td = tdMap[d];
-        const isToday = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+        const td = tdMap[d],
+          isT = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
         let bg = 'rgba(255,255,255,.03)',
           color = 'var(--text3)',
           pip = '';
@@ -2463,8 +2569,7 @@
           pip = `<div style="font-size:9px;margin-top:1px">${td.pip>=0?'+':''}${td.pip.toFixed(0)}</div>`;
         }
         html +=
-          `<div style="background:${bg};border-radius:6px;padding:5px 3px;text-align:center;${isToday?'outline:1.5px solid var(--accent);':''}" title="${td?`${td.count} trade, ${td.pip>=0?'+':''}${td.pip.toFixed(0)} pip`:'Tidak trading'}">
-      <div style="font-size:11px;color:${isToday?'var(--accent)':color};font-weight:${isToday?700:400}">${d}</div>${pip}</div>`;
+          `<div style="background:${bg};border-radius:6px;padding:5px 3px;text-align:center;${isT?'outline:1.5px solid var(--accent);':''}"><div style="font-size:11px;color:${isT?'var(--accent)':color};font-weight:${isT?700:400}">${d}</div>${pip}</div>`;
       }
       document.getElementById('cal-grid').innerHTML = html;
     }
@@ -2474,22 +2579,13 @@
       const tbody = document.getElementById('h-list-body');
       if (!sorted.length) {
         tbody.innerHTML =
-          `<tr><td colspan="8" style="color:var(--text3);padding:20px;text-align:center">Tidak ada data sesuai filter</td></tr>`;
+          `<tr><td colspan="8" style="color:var(--text3);padding:20px;text-align:center">Tidak ada data</td></tr>`;
         return;
       }
       tbody.innerHTML = sorted.map((t, i) => {
         const rb = t.result === 'win' ? `<span class="badge badge-green">✅ Win</span>` : t.result === 'loss' ?
           `<span class="badge badge-red">❌ Loss</span>` : `<span class="badge badge-gray">➖ BE</span>`;
-        return `<tr>
-      <td style="color:var(--text3)">${i+1}</td>
-      <td style="color:var(--text3);font-size:12px">${t.date||'—'}</td>
-      <td style="font-weight:500">${t.pair}</td>
-      <td style="color:var(--text2);font-size:12px">${t.setup}</td>
-      <td><span class="badge ${t.dir==='BUY'?'badge-green':'badge-red'}">${t.dir}</span></td>
-      <td>${rb}</td>
-      <td style="color:${t.pips>=0?'var(--green)':'var(--red)'};font-weight:600">${t.pips>=0?'+':''}${t.pips}</td>
-      <td style="color:var(--text3);font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.note||'—'}</td>
-    </tr>`;
+        return `<tr><td style="color:var(--text3)">${i+1}</td><td style="color:var(--text3);font-size:12px">${t.date||'—'}</td><td style="font-weight:500">${t.pair}</td><td style="color:var(--text2);font-size:12px">${t.setup}</td><td><span class="badge ${t.dir==='BUY'?'badge-green':'badge-red'}">${t.dir}</span></td><td>${rb}</td><td style="color:${t.pips>=0?'var(--green)':'var(--red)'};font-weight:600">${t.pips>=0?'+':''}${t.pips}</td><td style="color:var(--text3);font-size:12px">${t.note||'—'}</td></tr>`;
       }).join('');
     }
 
@@ -2514,7 +2610,6 @@
     setInterval(renderDashboard, 60000);
     buildChecklist();
     renderJournal();
-    // Hide non-active historis tabs
     ['breakdown', 'calendar', 'list'].forEach(t => {
       const el = document.getElementById('htab-' + t);
       if (el) el.style.display = 'none';
